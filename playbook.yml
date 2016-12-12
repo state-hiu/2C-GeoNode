@@ -1,0 +1,9 @@
+- hosts: production 
+  remote_user: user
+  vars:
+    app_name: 2C-GeoNode 
+    github_user: state-hiu 
+    server_name: 0.0.0.0
+    deploy_user: user
+  roles:
+     - { role: geonode.geonode }
