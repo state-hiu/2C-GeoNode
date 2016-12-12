@@ -168,7 +168,7 @@ STATIC_ROOT = os.getenv('STATIC_ROOT',os.path.join(PROJECT_ROOT, "static_root"))
 
 # URL that handles the static files like app media.
 # Example: "http://media.lawrence.com"
-STATIC_URL = os.getenv('STATIC_URL',"/staticxx/")
+STATIC_URL = os.getenv('STATIC_URL',"/static/")
 
 # Additional directories which hold static files
 _DEFAULT_STATICFILES_DIRS = [
