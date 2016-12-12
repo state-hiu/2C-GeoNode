@@ -23,10 +23,5 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-       "geonode>=2.5",
-       "django-oauth-toolkit>=0.10.0",
-       "django-cors-headers>=1.1.0",
-       "celery==3.1.18",
-       "django-geonode-client==0.0.3",
     ],
 )
