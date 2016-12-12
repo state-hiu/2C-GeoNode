@@ -325,7 +325,8 @@ _DEFAULT_INSTALLED_APPS = (
     'tastypie',
     'polymorphic',
     'guardian',
-
+    'oauth2_provider',
+    'corsheaders',
 ) + GEONODE_APPS
 
 INSTALLED_APPS = os.getenv('INSTALLED_APPS',_DEFAULT_INSTALLED_APPS)

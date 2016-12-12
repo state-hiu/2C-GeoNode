@@ -1,3 +1,6 @@
 *.pyc
 *.db
 celerybeat-schedule.*
+downloaded/
+geoserver/
+state_2c_geonode.egg-info/
