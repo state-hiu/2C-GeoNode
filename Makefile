@@ -12,6 +12,7 @@ sync: up
 	docker-compose exec django django-admin.py migrate account --noinput
 	docker-compose exec django django-admin.py migrate --noinput
 	docker-compose exec django django-admin.py loaddata sample_admin
+	docker-compose exec django django-admin.py loaddata fixtures/default_oauth_apps.json
 
 wait:
 	sleep 5
