@@ -224,6 +224,7 @@ def sync(options):
     except:
         pass
     sh("python manage.py loaddata sample_admin.json")
+    sh("python manage.py loaddata geonode/base/fixtures/default_oauth_apps.json")
     sh("python manage.py loaddata geonode/base/fixtures/initial_data.json")
 
 
@@ -371,7 +372,7 @@ def start_geoserver(options):
     data_dir = path('geoserver/data').abspath()
     web_app = path('geoserver/geoserver').abspath()
     log_file = path('geoserver/jetty.log').abspath()
-    config = path('scripts/misc/jetty-runner.xml').abspath()
+    config = path('jetty-runner.xml').abspath()
     jetty_port = urlparse(GEOSERVER_BASE_URL).port
     # @todo - we should not have set workdir to the datadir but a bug in geoserver
     # prevents geonode security from initializing correctly otherwise
