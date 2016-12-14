@@ -537,16 +537,24 @@ MISSING_THUMBNAIL = os.getenv('MISSING_THUMBNAIL','geonode/img/missing_thumb.png
 # Search Snippet Cache Time in Seconds
 CACHE_TIME = int(os.getenv('CACHE_TIME','0'))
 
+
+GEOSERVER_LOCATION = os.getenv(
+    'GEOSERVER_LOCATION', 'http://localhost:8080/geoserver/'
+)
+GEOSERVER_PUBLIC_LOCATION = os.getenv(
+    'GEOSERVER_PUBLIC_LOCATION', 'http://localhost:8080/geoserver/'
+)
+
 # OGC (WMS/WFS/WCS) Server Settings
 # OGC (WMS/WFS/WCS) Server Settings
 _DEFAULT_OGC_SERVER = {
     'default': {
         'BACKEND': 'geonode.geoserver',
-        'LOCATION': 'http://localhost:8080/geoserver/',
+        'LOCATION': GEOSERVER_LOCATION,
         # PUBLIC_LOCATION needs to be kept like this because in dev mode
         # the proxy won't work and the integration tests will fail
         # the entire block has to be overridden in the local_settings
-        'PUBLIC_LOCATION': 'http://localhost:8080/geoserver/',
+        'PUBLIC_LOCATION': GEOSERVER_PUBLIC_LOCATION,
         'USER': 'admin',
         'PASSWORD': 'geoserver',
         'MAPFISH_PRINT_ENABLED': True,
