@@ -69,4 +69,4 @@ transifex-client==0.10
 xmltodict==0.9.2
 django-treebeard==3.0
 django-geonode-client==0.0.3
--e git://github.com/geonode/geonode.git#egg=geonode
+geonode==2.5.6
