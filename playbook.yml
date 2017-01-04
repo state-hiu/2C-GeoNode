@@ -3,16 +3,14 @@
   gather_facts: no
   pre_tasks:
     - name: 'install python2'
-      apt: name=python-simplejson
+      raw: apt -y update && apt install -y python-minimal
       sudo: yes
+    - setup:
   vars:
     app_name: state_2c_geonode
     github_user: state-hiu 
-    server_name: 35.166.0.53 
+    server_name: 35.166.207.187 
     repo_name: 2C-GeoNode
-    deploy_user: ubuntu 
-  pre_tasks:
-    - raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
-    - setup: # aka gather_facts
+    deploy_user: ubuntu
   roles:
      - { role: GeoNode.geonode }
