@@ -1,9 +1,14 @@
 - hosts: production 
   remote_user: ubuntu
+  gather_facts: no
+  pre_tasks:
+    - name: 'install python2'
+      apt: name=python-simplejson
+      sudo: yes
   vars:
     app_name: state_2c_geonode
     github_user: state-hiu 
-    server_name: 35.165.173.25
+    server_name: 35.166.0.53 
     repo_name: 2C-GeoNode
     deploy_user: ubuntu 
   pre_tasks:
