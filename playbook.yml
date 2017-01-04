@@ -1,9 +1,13 @@
 - hosts: production 
-  remote_user: user
+  remote_user: ubuntu
   vars:
-    app_name: 2C-GeoNode 
+    app_name: state_2c_geonode
     github_user: state-hiu 
-    server_name: 0.0.0.0
-    deploy_user: user
+    server_name: 35.165.173.25
+    repo_name: 2C-GeoNode
+    deploy_user: ubuntu 
+  pre_tasks:
+    - raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+    - setup: # aka gather_facts
   roles:
      - { role: geonode.geonode }
