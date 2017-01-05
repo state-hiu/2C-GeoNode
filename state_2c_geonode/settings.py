@@ -1048,3 +1048,13 @@ if 'geonode.geoserver' in INSTALLED_APPS:
     DB_DATASTORE = str2bool(os.getenv('DB_DATASTORE', 'True'))
 
     ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', ['localhost', ])
+
+# There are 3 ways to override GeoNode settings:
+# 1. Using environment variables, if your changes to GeoNode are minimal.
+# 2. Creating a downstream project, if you are doing a lot of customization.
+# 3. Override settings in a local_settings.py file, legacy.
+# Load more settings from a file called local_settings.py if it exists
+try:
+    from local_settings import *  # noqa
+except ImportError:
+    pass
