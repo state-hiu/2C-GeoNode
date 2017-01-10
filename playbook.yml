@@ -9,7 +9,7 @@
   vars:
     app_name: state_2c_geonode
     github_user: state-hiu 
-    server_name: 35.162.41.249 
+    server_name: 35.166.7.20 
     repo_name: 2C-GeoNode
     deploy_user: ubuntu
   roles:

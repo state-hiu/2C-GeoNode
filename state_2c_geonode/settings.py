@@ -1044,6 +1044,11 @@ if 'geonode.geoserver' in INSTALLED_APPS:
 
 AUTH_IP_WHITELIST = []
 
+# Keywords thesauri
+# e.g. THESAURI = [{'name':'inspire_themes', 'required':True, 'filter':True}, {'name':'inspire_concepts', 'filter':True}, ]
+# Required: (boolean, optional, default false) mandatory while editing metadata (not implemented yet)
+# Filter: (boolean, optional, default false) a filter option on that thesaurus will appear in the main search page
+THESAURI = []
 
 # There are 3 ways to override GeoNode settings:
 # 1. Using environment variables, if your changes to GeoNode are minimal.
@@ -1054,5 +1059,3 @@ try:
     from local_settings import *  # noqa
 except ImportError:
     pass
-
-
