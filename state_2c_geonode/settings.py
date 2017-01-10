@@ -1040,3 +1040,10 @@ if 'geonode.geoserver' in INSTALLED_APPS:
     DB_DATASTORE = str2bool(os.getenv('DB_DATASTORE', 'True'))
 
     ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', ['localhost', ])
+
+# Keywords thesauri
+# e.g. THESAURI = [{'name':'inspire_themes', 'required':True, 'filter':True}, {'name':'inspire_concepts', 'filter':True}, ]
+# Required: (boolean, optional, default false) mandatory while editing metadata (not implemented yet)
+# Filter: (boolean, optional, default false) a filter option on that thesaurus will appear in the main search page
+THESAURI = []
+
