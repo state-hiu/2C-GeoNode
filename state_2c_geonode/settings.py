@@ -700,13 +700,6 @@ _INIT_DEFAULT_LAYER_SOURCE = {
 DEFAULT_LAYER_SOURCE = os.getenv('DEFAULT_LAYER_SOURCE',_INIT_DEFAULT_LAYER_SOURCE)
 
 _DEFAULT_MAP_BASELAYERS = [{
-    "source": {"ptype": "gxp_olsource"},
-    "type": "OpenLayers.Layer",
-    "args": ["No background"],
-    "visibility": False,
-    "fixed": True,
-    "group":"background"
-}, {
     "source": {"ptype": "gxp_osmsource"},
     "type": "OpenLayers.Layer.OSM",
     "name": "mapnik",
