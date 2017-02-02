@@ -519,7 +519,7 @@ GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY',"ABQIAAAAkofooZxTfcCv9Wi3zzGTVxTnme5
 # GeoNode specific settings
 #
 
-SITEURL = os.getenv('SITEURL',"http://localhost:8000/")
+SITEURL = os.getenv('SITEURL',"http://2c.terranodo.io/")
 
 USE_QUEUE = str2bool(os.getenv('USE_QUEUE', 'False'))
 
@@ -537,12 +537,11 @@ MISSING_THUMBNAIL = os.getenv('MISSING_THUMBNAIL','geonode/img/missing_thumb.png
 # Search Snippet Cache Time in Seconds
 CACHE_TIME = int(os.getenv('CACHE_TIME','0'))
 
-
 GEOSERVER_LOCATION = os.getenv(
-    'GEOSERVER_LOCATION', 'http://localhost:8080/geoserver/'
+    'GEOSERVER_LOCATION', 'http://2c.terranodo.io/geoserver/'
 )
 GEOSERVER_PUBLIC_LOCATION = os.getenv(
-    'GEOSERVER_PUBLIC_LOCATION', 'http://localhost:8080/geoserver/'
+    'GEOSERVER_PUBLIC_LOCATION', 'http://2c.terranodo.io/geoserver/'
 )
 
 # OGC (WMS/WFS/WCS) Server Settings
@@ -665,10 +664,6 @@ PYCSW = os.getenv('PYCSW',_DEFAULT_PYSCSW)
 # Note: If set to EPSG:4326, then only EPSG:4326 basemaps will work.
 DEFAULT_MAP_CRS = os.getenv('DEFAULT_MAP_CRS',"EPSG:900913")
 
-
-# The FULLY QUALIFIED url to the GeoServer instance for this GeoNode.
-GEOSERVER_BASE_URL = os.getenv('GEOSERVER_BASE_URL',
-                               "http://localhost:8001/geoserver-geonode-dev/")
 
 # The username and password for a user that can add and edit layer details on GeoServer
 
