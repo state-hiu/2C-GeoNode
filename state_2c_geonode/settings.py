@@ -296,6 +296,7 @@ _DEFAULT_INSTALLED_APPS = (
     # Utility
     'pagination',
     'taggit',
+    'treebeard',
     'friendlytagloader',
     'geoexplorer',
     'geonode-client',
