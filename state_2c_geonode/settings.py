@@ -135,7 +135,7 @@ if LOCKDOWN_GEONODE:
     MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + \
         ('geonode.security.middleware.LoginRequiredMiddleware',)
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', ['localhost', '2c.terranodo.io'])
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', ['localhost', ])
 
 # There are 3 ways to override GeoNode settings:
 # 1. Using environment variables, if your changes to GeoNode are minimal.
