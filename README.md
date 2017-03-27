@@ -1,2 +1,40 @@
 State_2c_Geonode
 ========================
+
+This repo contains the static and template files for the 2C GeoNode as well as the configuration files needed to install GeoNode using the [ansible-geonode scripts](https://github.com/GeoNode/ansible-geonode).
+
+## Steps for Installing GeoNode on Amazon AWS
+
+The playbook.yml file in this repo has the settings used when installing GeoNode using ansible-geonode.
+
+On Amazon AWS:
+
+- create a new M3 large instance, download the pem key
+
+On your local machine:
+
+- make sure Ansible is installed. These are the commands to [install Ansible via Apt](http://docs.ansible.com/ansible/intro_installation.html#latest-releases-via-apt-ubuntu):
+
+```
+sudo apt-get install software-properties-common -y
+sudo apt-add-repository ppa:ansible/ansible -y
+sudo apt-get update -y
+sudo apt-get install ansible -y
+```
+
+version 2.2.1.0 should work, to find out which version of Ansible you have type ```ansible --version```.
+
+- Install the GeoNode.geonode role on Ansible Galaxy:
+```$ ansible-galaxy install GeoNode.geonode```
+
+- After you've installed Ansible, then you'll want Ansible to know which servers to connect to and manage. Ansible's inventory hosts file is used to list and group your servers. Its default location is /etc/ansible/hosts. Edit this file and add two lines that specify the location of your host, this should match your playbook.yml file. Example:
+
+```
+[amazon2]
+dev.secondarycities.geonode.state.gov
+```
+
+- run the ansible-playbook command. Ex:
+```
+$ ansible-playbook -v --private-key ~/keys/geonode_dev.pem playbook.yml
+```
