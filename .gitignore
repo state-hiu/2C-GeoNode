@@ -3,6 +3,7 @@
 celerybeat-schedule.*
 downloaded/
 geoserver/
+ansible/*
 state_2c_geonode.egg-info/
 state_2c_geonode/static_root/
 src/
