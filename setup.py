@@ -10,7 +10,7 @@ setup(
     author="",
     author_email="",
     description="state_2c_geonode, based on GeoNode",
-    long_description=(read('README.rst')),
+    long_description=(read('README.md')),
     # Full list of classifiers can be found at:
     # http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
