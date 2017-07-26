@@ -25,7 +25,7 @@ sudo apt-get install ansible -y
 version 2.2.1.0 should work, to find out which version of Ansible you have type ```ansible --version```.
 
 - Install the GeoNode.geonode role on Ansible Galaxy:
-```$ ansible-galaxy install GeoNode.geonode```
+```$ sudo ansible-galaxy install GeoNode.geonode```
 
 - After you've installed Ansible, then you'll want Ansible to know which servers to connect to and manage. Ansible's inventory hosts file is used to list and group your servers. Its default location is /etc/ansible/hosts. Edit this file and add two lines that specify the location of your host, this should match your playbook.yml file. Example:
 
