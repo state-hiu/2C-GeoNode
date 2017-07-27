@@ -16,6 +16,7 @@ On your local machine:
 - make sure Ansible is installed. These are the commands to [install Ansible via Apt](http://docs.ansible.com/ansible/intro_installation.html#latest-releases-via-apt-ubuntu):
 
 ```
+sudo apt-get update
 sudo apt-get install software-properties-common -y
 sudo apt-add-repository ppa:ansible/ansible -y
 sudo apt-get update -y
