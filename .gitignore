@@ -1,2 +1,3 @@
 state_2c_geonode/settings.py
+state_2c_geonode/local_settings.py
 *.pyc
