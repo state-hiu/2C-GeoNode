@@ -1040,6 +1040,14 @@ if 'geonode.geoserver' in INSTALLED_APPS:
 
     ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', ['localhost', ])
 
+
+SEARCH_FILTERS = {
+    'OWNERS_ENABLED': False,
+    'DATE_ENABLED': False,
+    'REGION_ENABLED': True,
+    'EXTENT_ENABLED': True,
+}
+
 AUTH_IP_WHITELIST = []
 
 # Keywords thesauri
