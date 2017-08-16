@@ -914,9 +914,9 @@ SEARCH_FILTERS = {
     'TYPE_ENABLED': True,
     'CATEGORIES_ENABLED': True,
     'OWNERS_ENABLED': True,
-    'KEYWORDS_ENABLED': True,
-    'H_KEYWORDS_ENABLED': True,
-    'T_KEYWORDS_ENABLED': True,
+    'KEYWORDS_ENABLED': False,
+    'H_KEYWORDS_ENABLED': False,
+    'T_KEYWORDS_ENABLED': False,
     'DATE_ENABLED': True,
     'REGION_ENABLED': True,
     'EXTENT_ENABLED': True,
@@ -1040,13 +1040,6 @@ if 'geonode.geoserver' in INSTALLED_APPS:
 
     ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', ['localhost', ])
 
-
-SEARCH_FILTERS = {
-    'OWNERS_ENABLED': False,
-    'DATE_ENABLED': False,
-    'REGION_ENABLED': True,
-    'EXTENT_ENABLED': True,
-}
 
 AUTH_IP_WHITELIST = []
 
