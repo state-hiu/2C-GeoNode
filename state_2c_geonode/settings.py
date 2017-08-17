@@ -913,13 +913,13 @@ SEARCH_FILTERS = {
     'TEXT_ENABLED': True,
     'TYPE_ENABLED': True,
     'CATEGORIES_ENABLED': True,
-    'OWNERS_ENABLED': True,
+    'OWNERS_ENABLED': False,
     'KEYWORDS_ENABLED': False,
     'H_KEYWORDS_ENABLED': False,
     'T_KEYWORDS_ENABLED': False,
-    'DATE_ENABLED': True,
-    'REGION_ENABLED': True,
-    'EXTENT_ENABLED': True,
+    'DATE_ENABLED': False,
+    'REGION_ENABLED': False,
+    'EXTENT_ENABLED': False,
 }
 
 # Queue non-blocking notifications.
