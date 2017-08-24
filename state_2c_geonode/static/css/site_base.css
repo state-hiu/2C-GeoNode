@@ -7842,3 +7842,11 @@ footer form {
 .table-user-profile-attribute {
   font-weight: bold;
 }
+.page-header h2 input {
+	display: inline;
+	margin-left: 30px;
+	width: 80%;
+}
+.page-header h2.page-title input {
+	width: 60%;
+}
