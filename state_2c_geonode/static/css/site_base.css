@@ -6868,7 +6868,7 @@ article.tab-pane {
   left: 10px;
 }
 .navbar-nav .search input {
-  width: 120px;
+  width: 220px;
   height: 32px;
   border: 1px solid #2c3e50;
   border-radius: 5px;
@@ -6974,7 +6974,7 @@ article.tab-pane {
 .home .cities .thumbnail {
   max-width: 250px;
   padding: 0;
-  border: 0;
+  border: 2px solid #777777;
 }
 @media (min-width: 1200px) {
   .home .cities .container {
