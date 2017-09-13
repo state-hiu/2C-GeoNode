@@ -539,10 +539,10 @@ MISSING_THUMBNAIL = os.getenv('MISSING_THUMBNAIL','geonode/img/missing_thumb.png
 CACHE_TIME = int(os.getenv('CACHE_TIME','0'))
 
 GEOSERVER_LOCATION = os.getenv(
-    'GEOSERVER_LOCATION', 'http://54.70.105.90/geoserver/'
+    'GEOSERVER_LOCATION', 'http://localhost:8080/geoserver/'
 )
 GEOSERVER_PUBLIC_LOCATION = os.getenv(
-    'GEOSERVER_PUBLIC_LOCATION', 'http://54.70.105.90/geoserver/'
+    'GEOSERVER_PUBLIC_LOCATION', 'http://localhost:8080/geoserver/'
 )
 
 # OGC (WMS/WFS/WCS) Server Settings
@@ -600,8 +600,8 @@ _DEFAULT_CATALOGUE = {
         # The FULLY QUALIFIED base url to the CSW instance for this GeoNode
         'URL': '%scatalogue/csw' % SITEURL,
 
-        # 'URL': 'http://34.212.207.9/geonetwork/srv/en/csw',
-        # 'URL': 'http://34.212.207.9/deegree-csw-demo-3.0.4/services',
+        # 'URL': 'http://localhost:8080/geonetwork/srv/en/csw',
+        # 'URL': 'http://localhost:8080/deegree-csw-demo-3.0.4/services',
 
         # login credentials (for GeoNetwork)
         # 'USER': 'admin',
@@ -1040,7 +1040,7 @@ if 'geonode.geoserver' in INSTALLED_APPS:
     DB_DATASTORE = str2bool(os.getenv('DB_DATASTORE', 'True'))
 
 
-    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', ['localhost', '54.70.105.90'])
+    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', ['localhost', ])
 
 AUTH_IP_WHITELIST = []
 
