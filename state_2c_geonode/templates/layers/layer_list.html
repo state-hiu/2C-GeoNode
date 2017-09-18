@@ -11,8 +11,15 @@
 <div class="page-header">
     <div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-4"><h2 class="page-title">{% trans "Explore Layers" %}</h2></div>
-        <div class="col-xs-7 col-sm-8 col-md-6"><input name="col-sm-7 text_search_input" id="text_search_input" ng-model="text_query" type="text" 
-            placeholder="{% trans 'Search by text' %}" class="form-control input-lg"></div>
+        <div class="col-xs-7 col-sm-8 col-md-6">
+	    <div class="input-group form-group-lg">
+	    <input name="text_search_input" id="text_search_input" ng-model="text_query" type="text" 
+                placeholder="{% trans 'Search by text' %}" class="form-control input-lg">
+            <span class="input-group-btn">
+                <button class="btn btn-default btn-lg" type="submit" id="text_search_btn"><i class="fa fa-search"></i></button>
+            </span>
+	    </div>
+	</div>	
         <div class="col-xs-5 col-sm-4 col-md-2"><a href="{% url "layer_upload" %}" class="pull-right btn btn-primary btn-lg">{% trans "Upload Layers" %}</a></div>
     </div>
 </div>

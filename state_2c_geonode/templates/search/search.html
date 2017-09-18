@@ -4,7 +4,7 @@
 {% load url from future %}
 
 {% block extra_head %}
-<link rel="stylesheet" href="{{ STATIC_URL}}css/search.css" />
+<link rel="stylesheet" href="{{ STATIC_URL}}css/site_base.css" />
 {% endblock %}
 
 {% block title %} {% trans "Search" %} - {{ block.super }} {% endblock %}
@@ -12,12 +12,21 @@
 {% block body_class %}search{% endblock %}
 
 {% block body_outer %}
-  <div class="page-header">
-    <h2>
-			{% trans "Search" %}
-			<input name="text_search_input" id="text_search_input" ng-model="text_query" type="text" placeholder="{% trans 'Search by text' %}" class="form-control">
-		</h2>
-  </div>
+   <div class="page-header">
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-2"><h2 class="page-title">{% trans "Search" %}</h2></div>
+        <div class="col-xs-12 col-sm-8 col-md-10">
+	    <div class="input-group form-group-lg">	
+	    	<input name="text_search_input" id="text_search_input" ng-model="text_query" type="text" 
+            		placeholder="{% trans 'Search by text' %}" class="form-control input-lg">
+	    	<span class="input-group-btn">
+                	<button class="btn btn-default btn-lg" type="submit" id="text_search_btn"><i class="fa fa-search"></i></button>
+   	    	</span>
+	    </div>
+	</div>
+     </div>
+   </div>
+ 
   {% with include_type_filter='true' %}
   {% with header='Type' %}
   {% with filter='type__in' %}
