@@ -17,21 +17,23 @@
 
     //Get data from apis and make them available to the page
     function query_api(params){   
+	$rootScope.$broadcast('performingSearch');
+
 	$http.get(Configs.url, {params: params || {}}).success(function(data){
-        data.meta.title__icontains = params.title__icontains;
-        $scope.results = data.objects;
-        $scope.total_counts = data.meta.total_count;
-        $scope.$root.query_data = data;
-	$rootScope.$broadcast('searchPerformed', data);
-	if (HAYSTACK_SEARCH) {
-          if ($location.search().hasOwnProperty('q')){
-            $scope.text_query = $location.search()['q'].replace(/\+/g," ");
-          }
-        } else {
-          if ($location.search().hasOwnProperty('title__icontains')){
-            $scope.text_query = $location.search()['title__icontains'].replace(/\+/g," ");
-          }
-        }
+            data.meta.title__icontains = params.title__icontains;
+            $scope.results = data.objects;
+            $scope.total_counts = data.meta.total_count;
+            $scope.$root.query_data = data;
+	    $rootScope.$broadcast('searchPerformed', data);
+	    if (HAYSTACK_SEARCH) {
+                if ($location.search().hasOwnProperty('q')){
+                   $scope.text_query = $location.search()['q'].replace(/\+/g," ");
+                }
+            } else {
+                if ($location.search().hasOwnProperty('title__icontains')){
+                    $scope.text_query = $location.search()['title__icontains'].replace(/\+/g," ");
+                }
+            }
 
         //Update facet/keyword/category counts from search results
         if (HAYSTACK_FACET_COUNTS){
