@@ -4,14 +4,17 @@ var module = angular.module('geonode_main_search');
 module.directive('resultCount', ['$rootScope', function($rootScope){
   return {
     template: "<span style='font-size:34px;'>"    +
-	      "    <span ng-show='showLoading'>Loading...</span>" +
+	      "    <span ng-show='showLoading'>" +
+	      "        <img style='width: 30px;margin-right: 6px;margin-bottom: 6px;'" +
+	      "        src='{{svgurl}}img/spinner.svg' alt='...'>Loading...</span>"    +
 	      "    <span ng-hide='showLoading'>{{counts_}} datasets found" +
-	      "        <span ng-hide='hideQuery()'> for <i>{{query_}}</i>  </span>" +
+	      "        <span ng-hide='hideQuery()'> for <i>{{query_}}</i>  </span>"    +
 	      "    </span>" +
 	      "</span>",
     scope: {
       counts: '=',
-      query: '='
+      query: '=',
+      svgurl: '@'
     },
     link: function(scope, elem) {
       scope.showLoading = false;
