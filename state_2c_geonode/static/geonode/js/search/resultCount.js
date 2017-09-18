@@ -17,7 +17,7 @@ module.directive('resultCount', ['$rootScope', function($rootScope){
       svgurl: '@'
     },
     link: function(scope, elem) {
-      scope.showLoading = false;
+      scope.showLoading = true;
       scope.query_ = scope.query;
 
       scope.hideQuery = function() {
