@@ -599,6 +599,7 @@ _DEFAULT_CATALOGUE = {
 
         # The FULLY QUALIFIED base url to the CSW instance for this GeoNode
         'URL': '%scatalogue/csw' % SITEURL,
+
         # 'URL': 'http://localhost:8080/geonetwork/srv/en/csw',
         # 'URL': 'http://localhost:8080/deegree-csw-demo-3.0.4/services',
 
@@ -910,7 +911,7 @@ LAYER_PREVIEW_LIBRARY = 'react'
 SERVICE_UPDATE_INTERVAL = 0
 
 SEARCH_FILTERS = {
-    'TEXT_ENABLED': True,
+    'TEXT_ENABLED': False,
     'TYPE_ENABLED': True,
     'CATEGORIES_ENABLED': False,
     'OWNERS_ENABLED': False,
@@ -1038,8 +1039,8 @@ if 'geonode.geoserver' in INSTALLED_APPS:
     # TODO: Allow overriding with an env var
     DB_DATASTORE = str2bool(os.getenv('DB_DATASTORE', 'True'))
 
-    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', ['localhost', ])
 
+    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', ['localhost', ])
 
 AUTH_IP_WHITELIST = []
 

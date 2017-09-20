@@ -7842,3 +7842,7 @@ footer form {
 .table-user-profile-attribute {
   font-weight: bold;
 }
+
+.page-header h2 {
+    margin-top: 6px;
+}
