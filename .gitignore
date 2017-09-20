@@ -8,3 +8,6 @@ state_2c_geonode.egg-info/
 state_2c_geonode/static_root/
 src/
 state_2c_geonode/uploaded/
+create_db_store.py
+default_oauth_apps.json
+sample_admin.json
