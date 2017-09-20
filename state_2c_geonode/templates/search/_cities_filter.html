@@ -1,0 +1,15 @@
+{% load i18n %}
+{% load base_tags %}
+{% load data_tags %}
+<nav class="filter">
+    <h4><a href="#" class="toggle toggle-nav"><i class="fa fa-chevron-down"></i>{% trans header %}</a></h4>
+    <ul class="nav" id="types">
+        {% get_cities as cities %}
+            {% for city in cities %}
+            <li>
+                <a id="{{ city.keyword }}" data-value="{{ city.keyword}}" data-filter="keywords__slug__in" ng-click="multiple_choice_listener($event)">{{ city.name|capfirst }}
+            </a>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>
