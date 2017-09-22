@@ -1076,3 +1076,4 @@ try:
     from local_settings import *  # noqa
 except ImportError:
     pass
+TEMPLATES[0]['OPTIONS']['context_processors'].append('state_2c_geonode.context_processors.resource_urls')
