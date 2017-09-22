@@ -1402,6 +1402,10 @@ a.bg-danger:focus {
   margin: 44px 0 22px;
   border-bottom: 1px solid #eeeeee;
 }
+.page-header h2 {
+  margin-top: 6px;
+}
+
 ul,
 ol {
   margin-top: 0;
@@ -7271,6 +7275,9 @@ article.tab-pane {
 }
 .grid-spacer {
   margin-top: 30px;
+}
+.grid-spacer .row > div {
+  padding-left: 16px;
 }
 /* Control items
 ----------------------- */
