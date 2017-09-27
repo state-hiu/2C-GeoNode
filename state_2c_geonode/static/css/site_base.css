@@ -6856,6 +6856,10 @@ article.tab-pane {
   background-color: #2c3e50;
   color: white;
 }
+.navbar-nav .dropdown-menu li a.active {
+  background-color: #18416b;
+  color: white;
+}
 .navbar-nav .dropdown-menu .divider {
   background-color: #2d4f77;
 }
