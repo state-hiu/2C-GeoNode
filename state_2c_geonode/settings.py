@@ -253,7 +253,8 @@ GEONODE_APPS = (
     # it's signals may rely on other apps' signals.
     'geonode.geoserver',
     'geonode.upload',
-    'geonode.tasks'
+    'geonode.tasks',
+    'local_data'
 )
 
 GEONODE_CONTRIB_APPS = (
@@ -1049,6 +1050,23 @@ AUTH_IP_WHITELIST = []
 # Required: (boolean, optional, default false) mandatory while editing metadata (not implemented yet)
 # Filter: (boolean, optional, default false) a filter option on that thesaurus will appear in the main search page
 THESAURI = []
+
+#Cities
+#Adding cities to 2d Cities project.
+#You can add more cities editing the following variable 
+CITIES = [
+    { "name": "Cusco, Peru", "keyword": "Cusco", "image": "/static/img/Cusco3.jpg"},
+    { "name": "Denpasar, Indonesia", "keyword": "Denpasar", "image": ""},
+    { "keyword": "Douala", "name": "Douala, Cameroon", "image": "/static/img/douala_web4.jpg" },
+    { "keyword": "Esmeraldas", "name": "Esmeraldas, Ecuador", "image": "/static/img/esmeraldas_web.jpg" },
+    { "keyword": "Kharkiv", "name": "Kharkiv, Ukraine", "image": "/static/img/Kharkiv4.jpg" },
+    { "keyword": "Medellin", "name": "Medellin, Colombia", "image": "/static/img/medellin4.jpg" },
+    { "keyword": "Merkelle", "name": "Mekelle, Ethiopia", "image": "/static/img/mekelle3.jpg" },
+    { "keyword": "Pokhara", "name": "Pokhara, Nepal", "image": "/static/img/pokhara3.jpg" },
+    { "keyword": "Port Harcourt", "name": "Port Harcourt, Nigeria", "image": "/static/img/portharcourt_web.jpg" },
+    { "keyword": "Santiago", "name": "Santiago, Dominican Republic", "image": "/static/img/santiago_web.jpg" }
+]
+
 
 # There are 3 ways to override GeoNode settings:
 # 1. Using environment variables, if your changes to GeoNode are minimal.

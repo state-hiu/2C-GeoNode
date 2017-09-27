@@ -1,0 +1,53 @@
+{% extends "layers/layer_base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load url from future %}
+
+{% block title %} {% trans "Explore Layers" %} - {{ block.super }} {% endblock %}
+
+{% block body_class %}layers explore{% endblock %}
+
+{% block body %}
+<div class="page-header">
+    <div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-4"><h2 class="page-title">{% trans "Explore Layers" %}</h2></div>
+        <div class="col-xs-12 col-sm-12 col-md-8">
+	    <div class="input-group form-group-lg">
+	    <input name="text_search_input" id="text_search_input" ng-model="text_query" type="text" 
+                placeholder="{% trans 'Search by text' %}" class="form-control input-lg">
+            <span class="input-group-btn">
+                <button class="btn btn-default btn-lg" type="submit" id="text_search_btn"><i class="fa fa-search"></i></button>
+            </span>
+	    </div>
+	</div>
+	{% comment %}	
+        <div class="col-xs-5 col-sm-4 col-md-2"><a href="{% url "layer_upload" %}" class="pull-right btn btn-primary btn-lg">{% trans "Upload Layers" %}</a></div> {% endcomment %}
+    </div>
+</div>
+  {% with include_type_filter='true' %}
+  {% with header='Type' %}
+  {% with filter='type__in' %}
+  {% include "search/_search_content.html" %}
+  {% endwith %}
+  {% endwith %}
+  {% endwith %}
+  {% include "_bulk_permissions_form.html" %}
+{% endblock %}
+
+{% block extra_script %}
+{{ block.super }}
+  {% if GEONODE_SECURITY_ENABLED %}
+    {% include "_permissions_form_js.html" %}
+  {% endif %}
+  <script type="text/javascript">
+      {% if HAYSTACK_SEARCH %}
+          SEARCH_URL = '{% url 'api_get_search' api_name='api' resource_name='base' %}?type__in=layer'
+      {% else %}
+          SEARCH_URL = '{% url 'api_dispatch_list' api_name='api' resource_name='layers' %}';
+      {% endif %}
+    FILTER_TYPE = 'layer';
+  </script>
+  {% with include_spatial='true' %}
+  {% include 'search/search_scripts.html' %}
+  {% endwith %}
+{% endblock extra_script %}
