@@ -28,7 +28,7 @@ from django.contrib import admin
 
 import geonode.proxy.urls
 
-from geonode.api.urls import api
+from local_data.urls import api
 from geonode.api.views import verify_token, roles, users, admin_role
 
 import autocomplete_light

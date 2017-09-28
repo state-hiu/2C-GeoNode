@@ -1,0 +1,96 @@
+from tastypie.constants import ALL, ALL_WITH_RELATIONS
+from geonode.api.resourcebase_api import CommonModelApi, CommonMetaApi
+from geonode.layers.models import Layer
+from geonode.maps.models import Map
+from geonode.documents.models import Document
+from geonode.base.models import ResourceBase
+from django.conf import settings
+from geonode.api.resourcebase_api import ResourceBaseResource, FeaturedResourceBaseResource
+
+class FullTextModelApi(CommonModelApi):
+
+   def get_list(self, request, **kwargs):
+        """
+        Returns a serialized list of resources.
+
+        Calls ``obj_get_list`` to provide the data, then handles that result
+        set and serializes it.
+
+        Should return a HttpResponse (200 OK).
+        """
+        # TODO: Uncached for now. Invalidation that works for everyone may be
+        # impossible.
+
+ 	query_sql="SELECT id, title, ts_rank_cd(to_tsvector(csw_anytext), query) as rank from base_resourcebase, to_tsquery('{0}') query where to_tsvector(csw_anytext) @@ query order by rank desc;"
+	if 'q' in request.GET:
+		search_query=request.GET['q']
+		search_query=search_query.replace(' ','&')
+		query_sql=query_sql.format(search_query)
+		#if  layers are being searched
+          	if request.path=='/api/layers/':
+            		id_objects=[item.id for item in ResourceBase.objects.raw(query_sql) if hasattr(item, 'layer')]
+            		objects = Layer.objects.filter(pk__in=id_objects)
+            		sorted_objects=objects #objects are sorted by matching ranking
+		if request.path=='/api/maps/':
+			 id_objects=[item.id for item in ResourceBase.objects.raw(query_sql) if hasattr(item, 'map')]
+			 objects = Map.objects.filter(pk__in=id_objects)
+                         sorted_objects=objects #objects are sorted by matching ranking
+		if request.path=='/api/documents/':
+                         id_objects=[item.id for item in ResourceBase.objects.raw(query_sql) if hasattr(item, 'document')]
+                         objects = Document.objects.filter(pk__in=id_objects)
+                         sorted_objects=objects #objects are sorted by matching ranking
+	else:
+            	base_bundle = self.build_bundle(request=request)
+           	objects = self.obj_get_list(
+               		bundle=base_bundle,
+               		**self.remove_api_resource_names(kwargs))
+            	sorted_objects = self.apply_sorting(objects, options=request.GET)
+
+        paginator = self._meta.paginator_class(
+            request.GET,
+            sorted_objects,
+            resource_uri=self.get_resource_uri(),
+            limit=self._meta.limit,
+            max_limit=self._meta.max_limit,
+            collection_name=self._meta.collection_name)
+        to_be_serialized = paginator.page()
+        to_be_serialized = self.alter_list_data_to_serialize(
+            request,
+            to_be_serialized)
+
+        return self.create_response(request, to_be_serialized, response_objects=objects)
+
+
+class LayerResource(FullTextModelApi):
+
+    """Layer API"""
+
+    class Meta(CommonMetaApi):
+        queryset = Layer.objects.distinct().order_by('-date')
+        if settings.RESOURCE_PUBLISHING:
+            queryset = queryset.filter(is_published=True)
+        resource_name = 'layers'
+        excludes = ['csw_anytext', 'metadata_xml']
+
+class MapResource(FullTextModelApi):
+
+    """Maps API"""
+
+    class Meta(CommonMetaApi):
+        queryset = Map.objects.distinct().order_by('-date')
+        if settings.RESOURCE_PUBLISHING:
+            queryset = queryset.filter(is_published=True)
+        resource_name = 'maps'
+
+
+class DocumentResource(FullTextModelApi):
+
+    """Maps API"""
+
+    class Meta(CommonMetaApi):
+        filtering = CommonMetaApi.filtering
+        filtering.update({'doc_type': ALL})
+        queryset = Document.objects.distinct().order_by('-date')
+        if settings.RESOURCE_PUBLISHING:
+            queryset = queryset.filter(is_published=True)
+        resource_name = 'documents'
