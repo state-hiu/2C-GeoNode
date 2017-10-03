@@ -4,11 +4,36 @@
       <link rel="shortcut icon" href="{{ STATIC_URL }}favicon-16x16.png" type="image/x-icon">
 {% endblock %}
 {% block extra_tab %}
-{% comment %}
-Add Tab for Third Party Apps
-<li>
- <a href="{{ PROJECT_ROOT }}app">App</a>
-</li>
-{% endcomment %}
+{% if SEARCH_FILTERS.CATEGORIES_MENU_ENABLED %}
+<script type="text/javascript">
+    (function() {
+	document.addEventListener('click', function(event) {
+		var dataset = event.target.dataset;
+		if(location.pathname === '/' && dataset.filter === 'category__identifier__in'){
+			var path = 'search?' + dataset.filter + '=' + dataset.value;
+			location.href = path;
+		}
+	});
+    })();
+</script>
+
+  <li>
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories<i class="fa fa-angle-down fa-lg"></i></a>
+    <ul class="dropdown-menu categories" id="categoriesId">
+    {% for category in CATEGORIES %}
+      <li><a data-value="{{ category.identifier }}" ng-class="setActiveCategories('{{category.identifier}}')" 
+		data-filter="category__identifier__in" ng-click="multiple_choice_listener($event)" style="cursor: pointer">
+         {% if category.gn_description %}
+             {{category.gn_description}}
+         {% else %}
+             {{category.description}}
+	 {% endif%}
+         </a>
+      </li>
+    {% endfor %}
+    </ul>
+  </li>
+
+{% endif %}
 {% endblock %}
 
