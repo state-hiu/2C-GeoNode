@@ -403,6 +403,7 @@ _DEFAULT_TEMPLATE_CONTEXT_PROCESSORS = (
     # The context processor below adds things like SITEURL
     # and GEOSERVER_BASE_URL to all pages that use a RequestContext
     'geonode.context_processors.resource_urls',
+    'state_2c_geonode.context_processors.resource_urls',
     'geonode.geoserver.context_processors.geoserver_urls',
 )
 TEMPLATE_CONTEXT_PROCESSORS = os.getenv('TEMPLATE_CONTEXT_PROCESSORS',_DEFAULT_TEMPLATE_CONTEXT_PROCESSORS)
@@ -917,6 +918,7 @@ SEARCH_FILTERS = {
     'TEXT_ENABLED': True,
     'TYPE_ENABLED': True,
     'CATEGORIES_ENABLED': False,
+    'CATEGORIES_MENU_ENABLED': os.getenv('CATEGORIES_MENU_ENABLED', False),
     'OWNERS_ENABLED': False,
     'KEYWORDS_ENABLED': False,
     'H_KEYWORDS_ENABLED': False,
