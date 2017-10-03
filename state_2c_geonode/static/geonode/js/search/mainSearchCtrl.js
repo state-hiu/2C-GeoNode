@@ -16,10 +16,8 @@
    
 
     //Get data from apis and make them available to the page
-    function query_api(params){   
+    function query_api(params){
 	$rootScope.$broadcast('performingSearch');
-	params.q=params.title__icontains;
-	delete params.title__icontains;
 	$http.get(Configs.url, {params: params || {}}).success(function(data){
             data.meta.title__icontains = params.q;
             $scope.results = data.objects;
