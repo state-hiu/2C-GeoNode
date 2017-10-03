@@ -5,7 +5,7 @@ from geonode.maps.models import Map
 from geonode.documents.models import Document
 from geonode.base.models import ResourceBase
 from django.conf import settings
-from geonode.api.resourcebase_api import ResourceBaseResource, FeaturedResourceBaseResource
+from geonode.api.resourcebase_api import ResourceBaseResource, FeaturedResourceBaseResource,DocumentResource, MapResource
 
 class FullTextModelApi(CommonModelApi):
 
@@ -20,7 +20,6 @@ class FullTextModelApi(CommonModelApi):
         """
         # TODO: Uncached for now. Invalidation that works for everyone may be
         # impossible.
-
  	query_sql="SELECT id, title, ts_rank_cd(to_tsvector(csw_anytext), query) as rank from base_resourcebase, to_tsquery('{0}') query where to_tsvector(csw_anytext) @@ query order by rank desc;"
 	if 'q' in request.GET:
 		search_query=request.GET['q']
@@ -29,21 +28,23 @@ class FullTextModelApi(CommonModelApi):
 		#if  layers are being searched
           	if request.path=='/api/layers/':
             		id_objects=[item.id for item in ResourceBase.objects.raw(query_sql) if hasattr(item, 'layer')]
-            		objects = Layer.objects.filter(pk__in=id_objects)
-            		sorted_objects=objects #objects are sorted by matching ranking
-		if request.path=='/api/maps/':
-			 id_objects=[item.id for item in ResourceBase.objects.raw(query_sql) if hasattr(item, 'map')]
-			 objects = Map.objects.filter(pk__in=id_objects)
-                         sorted_objects=objects #objects are sorted by matching ranking
-		if request.path=='/api/documents/':
-                         id_objects=[item.id for item in ResourceBase.objects.raw(query_sql) if hasattr(item, 'document')]
-                         objects = Document.objects.filter(pk__in=id_objects)
-                         sorted_objects=objects #objects are sorted by matching ranking
+            		base_bundle = self.build_bundle(request=request)
+			queryset = self.obj_get_list(
+                        	    bundle=base_bundle,
+                                    **self.remove_api_resource_names(kwargs))
+			objects = queryset.filter(pk__in=id_objects)
+			if 'dataprovider_type__in' in request.GET:
+				params=dict(request.GET)
+                        	objects = objects.filter(dataprovidertype__in=params['dataprovider_type__in'])
+			sorted_objects=objects #objects are sorted by matching ranking
 	else:
             	base_bundle = self.build_bundle(request=request)
            	objects = self.obj_get_list(
                		bundle=base_bundle,
                		**self.remove_api_resource_names(kwargs))
+		if 'dataprovider_type__in' in request.GET:
+			params=dict(request.GET)
+			objects = objects.filter(dataprovidertype__in=params['dataprovider_type__in'])
             	sorted_objects = self.apply_sorting(objects, options=request.GET)
 
         paginator = self._meta.paginator_class(
@@ -72,25 +73,3 @@ class LayerResource(FullTextModelApi):
         resource_name = 'layers'
         excludes = ['csw_anytext', 'metadata_xml']
 
-class MapResource(FullTextModelApi):
-
-    """Maps API"""
-
-    class Meta(CommonMetaApi):
-        queryset = Map.objects.distinct().order_by('-date')
-        if settings.RESOURCE_PUBLISHING:
-            queryset = queryset.filter(is_published=True)
-        resource_name = 'maps'
-
-
-class DocumentResource(FullTextModelApi):
-
-    """Maps API"""
-
-    class Meta(CommonMetaApi):
-        filtering = CommonMetaApi.filtering
-        filtering.update({'doc_type': ALL})
-        queryset = Document.objects.distinct().order_by('-date')
-        if settings.RESOURCE_PUBLISHING:
-            queryset = queryset.filter(is_published=True)
-        resource_name = 'documents'
