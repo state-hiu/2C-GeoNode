@@ -4,7 +4,7 @@
       <link rel="shortcut icon" href="{{ STATIC_URL }}favicon-16x16.png" type="image/x-icon">
 {% endblock %}
 {% block extra_tab %}
-
+{% if SEARCH_FILTERS.CATEGORIES_MENU_ENABLED %}
 <script type="text/javascript">
     (function() {
 	document.addEventListener('click', function(event) {
@@ -33,5 +33,7 @@
     {% endfor %}
     </ul>
   </li>
+
+{% endif %}
 {% endblock %}
 
