@@ -8,7 +8,31 @@ from django.conf import settings
 from geonode.api.resourcebase_api import ResourceBaseResource, FeaturedResourceBaseResource,DocumentResource, MapResource
 
 class FullTextModelApi(CommonModelApi):
-
+   VALUES = [
+        # fields in the db
+        'id',
+        'uuid',
+        'title',
+        'date',
+        'abstract',
+        'csw_wkt_geometry',
+        'csw_type',
+        'owner__username',
+        'share_count',
+        'popular_count',
+        'srid',
+        'category__gn_description',
+        'supplemental_information',
+        'thumbnail_url',
+        'detail_url',
+        'rating',
+	'keywords__slug',
+    ]
+   def format_objects(self, objects):
+        """
+        Format the objects for output in a response.
+        """
+	return objects.values(*self.VALUES)
    def get_list(self, request, **kwargs):
         """
         Returns a serialized list of resources.
