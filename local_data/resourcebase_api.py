@@ -26,7 +26,7 @@ class FullTextModelApi(CommonModelApi):
         'thumbnail_url',
         'detail_url',
         'rating',
-	'keywords__slug',
+	'keywords__name',
     ]
    def format_objects(self, objects):
         """
