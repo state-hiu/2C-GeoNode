@@ -20,8 +20,8 @@
 	$rootScope.$broadcast('performingSearch');
 	$http.get(Configs.url, {params: params || {}}).success(function(data){
             data.meta.title__icontains = params.q;
-            $scope.results = data.objects;
-            $scope.total_counts = data.meta.total_count;
+            $scope.results = joinLayersBy_uuid(data.objects);
+	    $scope.total_counts = data.meta.total_count;
             $scope.$root.query_data = data;
 	    $rootScope.$broadcast('searchPerformed', data);
 	    
@@ -52,6 +52,34 @@
         });
     };
     query_api($scope.query);
+
+    function joinLayersBy_uuid(objects){
+        // Prepare the first object
+        var prepareObject = objects[0];
+        var keywords = [prepareObject.keywords__slug];
+
+        var mergedArray = [];
+        
+        for (var i = 1; i < objects.length; i++) {
+            var currObj = objects[i];
+
+            if (currObj.uuid === prepareObject.uuid) {
+                keywords.push(currObj.keywords__slug);
+            }else {
+                prepareObject.keywords__slug = keywords;
+                mergedArray.push(prepareObject);
+
+                prepareObject = currObj
+                keywords = [currObj.keywords__slug];
+            }
+        }
+
+        // push the las item
+        prepareObject.keywords__slug = keywords;
+        mergedArray.push(prepareObject);
+
+        return mergedArray;
+    }
 	
     $scope.setActiveCategories = function(value){	
 	if('category__identifier__in' in $scope.query){
