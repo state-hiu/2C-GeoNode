@@ -1,5 +1,15 @@
 {% load i18n %}
+
 <nav class="filter">
-  <h4><a href="#" class="toggle toggle-nav"><i class="fa fa-chevron-right"></i> {% trans "Keywords" %}</a></h4>
-    <div id="treeview" class="nav"></div>
+    <h4><a href="#" class="toggle toggle-nav"><i class="fa fa-chevron-right"></i> {% trans "Keywords" %}</a></h4>
+{% verbatim %}   
+   <ul class="nav" id="types" ng-if="results.length">
+	<li ng-repeat="(key, value) in countKeywords">
+                <a id="{{ key }}" data-value="{{ key }}" data-filter="keywords__slug__in" ng-click="multiple_choice_listener($event)">
+                  {{ key }}
+		  <span class="badge pull-right">{{ value }}</span>
+                </a>
+         </li>
+    </ul>
 </nav>
+{% endverbatim %}

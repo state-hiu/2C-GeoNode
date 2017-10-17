@@ -19,9 +19,10 @@
     function query_api(params){
 	$rootScope.$broadcast('performingSearch');
 	$http.get(Configs.url, {params: params || {}}).success(function(data){
-            data.meta.title__icontains = params.q;
+	data.meta.title__icontains = params.q;
+	    $scope.countKeywords = countByKeywords(data.objects);
             $scope.results = joinLayersBy_uuid(data.objects);
-	    $scope.total_counts = data.meta.total_count;
+     	    $scope.total_counts = data.meta.total_count;
             $scope.$root.query_data = data;
 	    $rootScope.$broadcast('searchPerformed', data);
 	    
@@ -55,8 +56,12 @@
 
     function joinLayersBy_uuid(objects){
         // Prepare the first object
+	if(objects.length === 0){
+	    return [];
+	}
+
         var prepareObject = objects[0];
-        var keywords = [prepareObject.keywords__slug];
+        var keywords = [prepareObject.keywords__name];
 
         var mergedArray = [];
         
@@ -64,13 +69,13 @@
             var currObj = objects[i];
 
             if (currObj.uuid === prepareObject.uuid) {
-                keywords.push(currObj.keywords__slug);
+                keywords.push(currObj.keywords__name);
             }else {
-                prepareObject.keywords__slug = keywords;
+                prepareObject.keywords__name = keywords;
                 mergedArray.push(prepareObject);
 
                 prepareObject = currObj
-                keywords = [currObj.keywords__slug];
+                keywords = [currObj.keywords__name];
             }
         }
 
@@ -80,6 +85,23 @@
 
         return mergedArray;
     }
+
+    function countByKeywords(objects) {
+        var keywordsCount = {}; 
+        objects.map(function(obj) {
+            return obj.keywords__name;
+        })
+        .sort()
+        .map(function(kw){
+            if (keywordsCount[kw]) {
+                keywordsCount[kw]++;
+            }else{
+                keywordsCount[kw] = 1;
+            }
+        });
+        return keywordsCount;
+    }
+
 	
     $scope.setActiveCategories = function(value){	
 	if('category__identifier__in' in $scope.query){

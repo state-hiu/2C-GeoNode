@@ -19,7 +19,7 @@
           <p class="abstract">{{ item.abstract | limitTo: 300 }}{{ item.abstract.length  > 300 ? '...' : ''}}</p>
           <div class="row">
             <div class="col-xs-12" style="padding-bottom: 10px;">
-	    	<span ng-repeat="keyword in item.keywords__slug">
+	    	<span ng-repeat="keyword in item.keywords__name">
 		    <span class="label label-primary">{{ keyword }}</span>
 		</span>
 	    </div>
