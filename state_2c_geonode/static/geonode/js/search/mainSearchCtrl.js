@@ -20,7 +20,7 @@
 	$rootScope.$broadcast('performingSearch');
 	$http.get(Configs.url, {params: params || {}}).success(function(data){
 	data.meta.title__icontains = params.q;
-	    $scope.countKeywords = countByKeywords(data.objects);
+	    $scope.countKeywords = data.facet_keywords;
             $scope.results = joinLayersBy_uuid(data.objects);
      	    $scope.total_counts = data.meta.total_count;
             $scope.$root.query_data = data;
@@ -80,28 +80,11 @@
         }
 
         // push the las item
-        prepareObject.keywords__slug = keywords;
+        prepareObject.keywords__name = keywords;
         mergedArray.push(prepareObject);
 
         return mergedArray;
     }
-
-    function countByKeywords(objects) {
-        var keywordsCount = {}; 
-        objects.map(function(obj) {
-            return obj.keywords__name;
-        })
-        .sort()
-        .map(function(kw){
-            if (keywordsCount[kw]) {
-                keywordsCount[kw]++;
-            }else{
-                keywordsCount[kw] = 1;
-            }
-        });
-        return keywordsCount;
-    }
-
 	
     $scope.setActiveCategories = function(value){	
 	if('category__identifier__in' in $scope.query){

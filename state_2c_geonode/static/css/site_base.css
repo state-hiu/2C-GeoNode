@@ -7423,6 +7423,14 @@ nav.filter li a {
   cursor: pointer;
   padding: 5px 10px;
 }
+nav.filter li a .keyword-filter{
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 80%;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
 .selections h5 {
   font-weight: 400;
 }
