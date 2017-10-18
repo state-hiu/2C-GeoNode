@@ -1,3 +1,4 @@
+from collections import Counter
 from tastypie.constants import ALL, ALL_WITH_RELATIONS
 from geonode.api.resourcebase_api import CommonModelApi, CommonMetaApi
 from geonode.layers.models import Layer
@@ -83,6 +84,9 @@ class FullTextModelApi(CommonModelApi):
             request,
             to_be_serialized)
 
+	keywords = list_key=[layer.keyword_list() for layer in objects]
+	flat_list = [item for sublist in keywords for item in sublist]
+	to_be_serialized['facet_keywords']=dict(Counter(flat_list))
         return self.create_response(request, to_be_serialized, response_objects=objects)
 
 
