@@ -20,7 +20,7 @@
 	$rootScope.$broadcast('performingSearch');
 	$http.get(Configs.url, {params: params || {}}).success(function(data){
 	data.meta.title__icontains = params.q;
-	    $scope.countKeywords = data.facet_keywords;
+	    $scope.countKeywords = objToArray(data.facet_keywords);
             $scope.results = joinLayersBy_uuid(data.objects);
      	    $scope.total_counts = data.meta.total_count;
             $scope.$root.query_data = data;
@@ -53,6 +53,12 @@
         });
     };
     query_api($scope.query);
+
+    function objToArray(list){
+	return Object.keys(list).map(function(key){
+    	    return {'key': key, 'value': list[key]};
+	});
+    }
 
     function joinLayersBy_uuid(objects){
         // Prepare the first object
