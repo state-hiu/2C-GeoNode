@@ -7,7 +7,6 @@ from geonode.documents.models import Document
 from geonode.base.models import ResourceBase
 from django.conf import settings
 from geonode.api.resourcebase_api import ResourceBaseResource, FeaturedResourceBaseResource,DocumentResource, MapResource
-from collections import Counter
 
 class FullTextModelApi(CommonModelApi):
    VALUES = [
