@@ -16,15 +16,16 @@
    
 
     //Get data from apis and make them available to the page
-    function query_api(params){   
+    function query_api(params){
 	$rootScope.$broadcast('performingSearch');
-
 	$http.get(Configs.url, {params: params || {}}).success(function(data){
-            data.meta.title__icontains = params.title__icontains;
-            $scope.results = data.objects;
-            $scope.total_counts = data.meta.total_count;
+	data.meta.title__icontains = params.q;
+	    $scope.countKeywords = objToArray(data.facet_keywords);
+            $scope.results = joinLayersBy_uuid(data.objects);
+     	    $scope.total_counts = data.meta.total_count;
             $scope.$root.query_data = data;
 	    $rootScope.$broadcast('searchPerformed', data);
+	    
 	    if (HAYSTACK_SEARCH) {
                 if ($location.search().hasOwnProperty('q')){
                    $scope.text_query = $location.search()['q'].replace(/\+/g," ");
@@ -35,26 +36,79 @@
                 }
             }
 
-        //Update facet/keyword/category counts from search results
-        if (HAYSTACK_FACET_COUNTS){
-            module.haystack_facets($http, $scope.$root, $location);
-            $("#types").find("a").each(function(){
-                if ($(this)[0].id in data.meta.facets.subtype) {
-                    $(this).find("span").text(data.meta.facets.subtype[$(this)[0].id]);
-                }
-                else if ($(this)[0].id in data.meta.facets.type) {
-                    $(this).find("span").text(data.meta.facets.type[$(this)[0].id]);
-                } else {
-                    $(this).find("span").text("0");
-                }
-            });
-        }
-      });
+            //Update facet/keyword/category counts from search results
+            if (HAYSTACK_FACET_COUNTS){
+                module.haystack_facets($http, $scope.$root, $location);
+                $("#types").find("a").each(function(){
+                    if ($(this)[0].id in data.meta.facets.subtype) {
+                        $(this).find("span").text(data.meta.facets.subtype[$(this)[0].id]);
+                    } 
+                    else if ($(this)[0].id in data.meta.facets.type) {
+                        $(this).find("span").text(data.meta.facets.type[$(this)[0].id]);
+                    } else {
+                        $(this).find("span").text("0");
+                    }
+                });
+            }
+        });
     };
     query_api($scope.query);
 
+    function objToArray(list){
+	if(list !== Object(list)){
+	    return [];
+	}
+	return Object.keys(list).map(function(key){
+    	    return {'key': key, 'value': list[key]};
+	});
+    }
 
-    /*
+    function joinLayersBy_uuid(objects){
+        // Prepare the first object
+	if(objects.length === 0){
+	    return [];
+	}
+
+        var prepareObject = objects[0];
+        var keywords = [prepareObject.keywords__name];
+
+        var mergedArray = [];
+        
+        for (var i = 1; i < objects.length; i++) {
+            var currObj = objects[i];
+
+            if (currObj.uuid === prepareObject.uuid) {
+                keywords.push(currObj.keywords__name);
+            }else {
+                prepareObject.keywords__name = keywords;
+                mergedArray.push(prepareObject);
+
+                prepareObject = currObj
+                keywords = [currObj.keywords__name];
+            }
+        }
+
+        // push the las item
+        prepareObject.keywords__name = keywords;
+        mergedArray.push(prepareObject);
+
+        return mergedArray;
+    }
+	
+    $scope.setActiveCategories = function(value){	
+	if('category__identifier__in' in $scope.query){
+	    var category = $scope.query['category__identifier__in'];
+	    if(category === value) return 'active';
+
+	    for(var item of category){
+		if(value === item){
+		    return 'active';
+	        }
+	    }
+	}
+    };
+ 
+   /*
     * Pagination
     */
     // Control what happens when the total results change
@@ -99,7 +153,7 @@
     if (!Configs.hasOwnProperty("disableQuerySync")) {
         // Keep in sync the page location with the query object
         $scope.$watch('query', function(){
-          $location.search($scope.query);
+		$location.search($scope.query);
         }, true);
     }
 
@@ -168,42 +222,39 @@
       var query_entry = [];
       var data_filter = element.attr('data-filter');
       var value = element.attr('data-value');
+      var filterParams = $scope.query[data_filter];
 
-      // If the query object has the record then grab it
-      if ($scope.query.hasOwnProperty(data_filter)){
+      if($scope.query[data_filter] !== value){
+          // If the query object has the record then grab it
+	  if(data_filter in $scope.query){
+              // When in the location are passed two filters of the same
+              // type then they are put in an array otherwise is a single string
+              if (Array.isArray($scope.query[data_filter])){
+                  query_entry = $scope.query[data_filter];
+              }else{
+	          query_entry.push($scope.query[data_filter]);
+	      }
+	  }
 
-        // When in the location are passed two filters of the same
-        // type then they are put in an array otherwise is a single string
-        if ($scope.query[data_filter] instanceof Array){
-          query_entry = $scope.query[data_filter];
-        }else{
-          query_entry.push($scope.query[data_filter]);
-        }
+          if(element.hasClass('active')){
+              // clear the active class from it
+              element.removeClass('active');
+              // Remove the entry from the correct query in scope
+              query_entry.splice(query_entry.indexOf(value), 1);
+          } else {
+              // Add the entry in the correct query
+              if (query_entry.indexOf(value) === -1){
+                  query_entry.push(value);
+              }
+              element.addClass('active');
+          }
+
+          //save back the new query entry to the scope query
+          $scope.query[data_filter] = query_entry;
       }
-
-      // If the element is active active then deactivate it
-      if(element.hasClass('active')){
-        // clear the active class from it
-        element.removeClass('active');
-
-        // Remove the entry from the correct query in scope
-
-        query_entry.splice(query_entry.indexOf(value), 1);
-      }
-      // if is not active then activate it
-      else if(!element.hasClass('active')){
-        // Add the entry in the correct query
-        if (query_entry.indexOf(value) == -1){
-          query_entry.push(value);
-        }
-        element.addClass('active');
-      }
-
-      //save back the new query entry to the scope query
-      $scope.query[data_filter] = query_entry;
 
       //if the entry is empty then delete the property from the query
-      if(query_entry.length == 0){
+      if(query_entry.length === 0){
         delete($scope.query[data_filter]);
       }
       query_api($scope.query);
@@ -265,16 +316,18 @@
     });
 
     $('#text_search_btn').click(function(){
-        if (HAYSTACK_SEARCH)
+	if (HAYSTACK_SEARCH){
             $scope.query['q'] = $('#text_search_input').val();
-        else
-            if (AUTOCOMPLETE_URL_RESOURCEBASE == "/autocomplete/ProfileAutocomplete/")
+        } else {
+            if (AUTOCOMPLETE_URL_RESOURCEBASE === "/autocomplete/ProfileAutocomplete/"){
                 // a user profile has no title; if search was triggered from
                 // the /people page, filter by username instead
                 var query_key = 'username__icontains';
-            else
-                var query_key = 'title__icontains';
-            $scope.query[query_key] = $('#text_search_input').val();
+            }else {
+                var query_key = $( "#text_search_input" ).data( "queryKey" );
+            }
+	    $scope.query[query_key] = $('#text_search_input').val();
+	}
         query_api($scope.query);
     });
 

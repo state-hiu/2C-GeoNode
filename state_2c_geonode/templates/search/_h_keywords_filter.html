@@ -1,0 +1,16 @@
+{% load i18n %}
+
+<nav class="filter">
+    <h4><a href="#" class="toggle toggle-nav"><i class="fa fa-chevron-right"></i> {% trans "Keywords" %}</a></h4>
+{% verbatim %}   
+   <ul class="nav closed" id="keywords" ng-if="countKeywords.length">
+	<input placeholder="Search" class="form-control" ng-model="searchKeywordText" style="margin-bottom: 4px;">
+	<li ng-repeat="item in countKeywords | filter:searchKeywordText | limitTo : 10">
+                <a id="{{ item.key }}" data-value="{{ item.key }}" data-filter="keywords__slug__in" ng-click="multiple_choice_listener($event)">
+                  <span class="keyword-filter"> {{ item.key }} </span>
+		  <span class="badge pull-right">{{ item.value }}</span>
+                </a>
+         </li>
+    </ul>
+</nav>
+{% endverbatim %}
