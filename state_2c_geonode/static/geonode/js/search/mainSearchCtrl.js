@@ -55,6 +55,9 @@
     query_api($scope.query);
 
     function objToArray(list){
+	if(list !== Object(list)){
+	    return [];
+	}
 	return Object.keys(list).map(function(key){
     	    return {'key': key, 'value': list[key]};
 	});
