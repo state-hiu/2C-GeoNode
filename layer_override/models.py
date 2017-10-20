@@ -10,4 +10,4 @@ class Layerextension(object):
     dataprovider_name = models.CharField(max_length=128,blank=True,null=True)
     dataprovider_url = models.CharField(max_length=255, null=True, blank=True)
     dataprovider_contact = models.CharField(max_length=128,blank=True,null=True) 
-    dataprovidertype = models.CharField(max_length=128,null=True)
+    dataprovider_type = models.CharField(max_length=128,null=True)
