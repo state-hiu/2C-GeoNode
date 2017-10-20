@@ -9,5 +9,5 @@ class Layerextension(object):
     city = models.CharField(max_length=128,blank=True,null=True)
     dataprovider_name = models.CharField(max_length=128,blank=True,null=True)
     dataprovider_url = models.CharField(max_length=255, null=True, blank=True)
-    dataprovider_contact = models.CharField(max_length=128,blank=True,null=True) 
+    dataprovider_contact = models.CharField(max_length=255,blank=True,null=True)
     dataprovider_type = models.CharField(max_length=128,null=True)
