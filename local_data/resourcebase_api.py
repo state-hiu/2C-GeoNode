@@ -27,13 +27,13 @@ class FullTextModelApi(CommonModelApi):
         'thumbnail_url',
         'detail_url',
         'rating',
-	'keywords__name',
+        'keywords__name',
     ]
    def format_objects(self, objects):
         """
         Format the objects for output in a response.
         """
-	return objects.values(*self.VALUES)
+        return objects.values(*self.VALUES)
    def get_list(self, request, **kwargs):
         """
         Returns a serialized list of resources.
@@ -45,32 +45,32 @@ class FullTextModelApi(CommonModelApi):
         """
         # TODO: Uncached for now. Invalidation that works for everyone may be
         # impossible.
- 	query_sql="SELECT id, title, ts_rank_cd(to_tsvector(csw_anytext), query) as rank from base_resourcebase, to_tsquery('{0}') query where to_tsvector(csw_anytext) @@ query order by rank desc;"
-	if 'q' in request.GET:
-		search_query=request.GET['q']
-		search_query=search_query.replace(' ','&')
-		query_sql=query_sql.format(search_query)
-		#if  layers are being searched
-          	if request.path=='/api/layers/':
-            		id_objects=[item.id for item in ResourceBase.objects.raw(query_sql) if hasattr(item, 'layer')]
-            		base_bundle = self.build_bundle(request=request)
-			queryset = self.obj_get_list(
-                        	    bundle=base_bundle,
-                                    **self.remove_api_resource_names(kwargs))
-			objects = queryset.filter(pk__in=id_objects)
-			if 'dataprovider_type__in' in request.GET:
-				params=dict(request.GET)
-                        	objects = objects.filter(dataprovider_type__in=params['dataprovider_type__in'])
-			sorted_objects=objects #objects are sorted by matching ranking
-	else:
-            	base_bundle = self.build_bundle(request=request)
-           	objects = self.obj_get_list(
-               		bundle=base_bundle,
-               		**self.remove_api_resource_names(kwargs))
-		if 'dataprovider_type__in' in request.GET:
-			params=dict(request.GET)
-			objects = objects.filter(dataprovider_type__in=params['dataprovider_type__in'])
-            	sorted_objects = self.apply_sorting(objects, options=request.GET)
+        query_sql="SELECT id, title, ts_rank_cd(to_tsvector(csw_anytext), query) as rank from base_resourcebase, to_tsquery('{0}') query where to_tsvector(csw_anytext) @@ query order by rank desc;"
+        if 'q' in request.GET:
+            search_query=request.GET['q']
+            search_query=search_query.replace(' ','&')
+            query_sql=query_sql.format(search_query)
+            #if  layers are being searched
+            if request.path=='/api/layers/':
+                id_objects=[item.id for item in ResourceBase.objects.raw(query_sql) if hasattr(item, 'layer')]
+                base_bundle = self.build_bundle(request=request)
+                queryset = self.obj_get_list(
+                        bundle=base_bundle,
+                        **self.remove_api_resource_names(kwargs))
+                objects = queryset.filter(pk__in=id_objects)
+                if 'dataprovider_type__in' in request.GET:
+                    params=dict(request.GET)
+                    objects = objects.filter(dataprovider_type__in=params['dataprovider_type__in'])
+                sorted_objects=objects #objects are sorted by matching ranking
+        else:
+            base_bundle = self.build_bundle(request=request)
+            objects = self.obj_get_list(
+                bundle=base_bundle,
+                **self.remove_api_resource_names(kwargs))
+            if 'dataprovider_type__in' in request.GET:
+                params=dict(request.GET)
+                objects = objects.filter(dataprovider_type__in=params['dataprovider_type__in'])
+            sorted_objects = self.apply_sorting(objects, options=request.GET)
 
         paginator = self._meta.paginator_class(
             request.GET,
@@ -84,9 +84,9 @@ class FullTextModelApi(CommonModelApi):
             request,
             to_be_serialized)
 
-	keywords = list_key=[layer.keyword_list() for layer in objects]
-	flat_list = [item for sublist in keywords for item in sublist]
-	to_be_serialized['facet_keywords']=dict(Counter(flat_list))
+        keywords = list_key=[layer.keyword_list() for layer in objects]
+        flat_list = [item for sublist in keywords for item in sublist]
+        to_be_serialized['facet_keywords']=dict(Counter(flat_list))
         return self.create_response(request, to_be_serialized, response_objects=objects)
 
 
