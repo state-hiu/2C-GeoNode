@@ -60,7 +60,7 @@ class FullTextModelApi(CommonModelApi):
                 objects = queryset.filter(pk__in=id_objects)
                 if 'dataprovider_type__in' in request.GET:
                     params=dict(request.GET)
-                    objects = objects.filter(dataprovider_type__in=params['dataprovider_type__in'])
+                    objects = objects.filter(dataprovidertype__in=params['dataprovider_type__in'])
                 sorted_objects=objects #objects are sorted by matching ranking
         else:
             base_bundle = self.build_bundle(request=request)
@@ -69,7 +69,7 @@ class FullTextModelApi(CommonModelApi):
                     **self.remove_api_resource_names(kwargs))
             if 'dataprovider_type__in' in request.GET:
                 params=dict(request.GET)
-                objects = objects.filter(dataprovider_type__in=params['dataprovider_type__in'])
+                objects = objects.filter(dataprovidertype__in=params['dataprovider_type__in'])
             sorted_objects = self.apply_sorting(objects, options=request.GET)
 
         paginator = self._meta.paginator_class(
