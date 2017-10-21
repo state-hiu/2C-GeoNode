@@ -9,7 +9,7 @@ from django.conf import settings
 from geonode.api.resourcebase_api import ResourceBaseResource, FeaturedResourceBaseResource,DocumentResource, MapResource
 
 class FullTextModelApi(CommonModelApi):
-   VALUES = [
+    VALUES = [
         # fields in the db
         'id',
         'uuid',
@@ -29,12 +29,12 @@ class FullTextModelApi(CommonModelApi):
         'rating',
         'keywords__name',
     ]
-   def format_objects(self, objects):
+    def format_objects(self, objects):
         """
         Format the objects for output in a response.
         """
         return objects.values(*self.VALUES)
-   def get_list(self, request, **kwargs):
+    def get_list(self, request, **kwargs):
         """
         Returns a serialized list of resources.
 
@@ -55,8 +55,8 @@ class FullTextModelApi(CommonModelApi):
                 id_objects=[item.id for item in ResourceBase.objects.raw(query_sql) if hasattr(item, 'layer')]
                 base_bundle = self.build_bundle(request=request)
                 queryset = self.obj_get_list(
-                        bundle=base_bundle,
-                        **self.remove_api_resource_names(kwargs))
+                            bundle=base_bundle,
+                            **self.remove_api_resource_names(kwargs))
                 objects = queryset.filter(pk__in=id_objects)
                 if 'dataprovider_type__in' in request.GET:
                     params=dict(request.GET)
@@ -65,8 +65,8 @@ class FullTextModelApi(CommonModelApi):
         else:
             base_bundle = self.build_bundle(request=request)
             objects = self.obj_get_list(
-                bundle=base_bundle,
-                **self.remove_api_resource_names(kwargs))
+                    bundle=base_bundle,
+                    **self.remove_api_resource_names(kwargs))
             if 'dataprovider_type__in' in request.GET:
                 params=dict(request.GET)
                 objects = objects.filter(dataprovider_type__in=params['dataprovider_type__in'])
