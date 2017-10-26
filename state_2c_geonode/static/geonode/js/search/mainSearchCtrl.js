@@ -298,7 +298,7 @@
           url: AUTOCOMPLETE_URL_RESOURCEBASE,
           choiceSelector: 'span',
           hideAfter: 200,
-          minimumCharacters: 1,
+          minimumCharacters: 3,
           placeholder: gettext('Enter your text here ...'),
           autoHilightFirst: false
     });
