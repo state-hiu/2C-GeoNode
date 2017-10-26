@@ -60,6 +60,8 @@
 	}
 	return Object.keys(list).map(function(key){
     	    return {'key': key, 'value': list[key]};
+	}).sort( function(a, b){
+  	    return b.value - a.value;
 	});
     }
 
