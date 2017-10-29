@@ -917,15 +917,15 @@ SERVICE_UPDATE_INTERVAL = 0
 SEARCH_FILTERS = {
     'TEXT_ENABLED': False,
     'TYPE_ENABLED': True,
-    'CATEGORIES_ENABLED': False,
-    'CATEGORIES_MENU_ENABLED': os.getenv('CATEGORIES_MENU_ENABLED', False),
+    'CATEGORIES_ENABLED': True,
+    'CATEGORIES_MENU_ENABLED': True),
     'OWNERS_ENABLED': False,
     'KEYWORDS_ENABLED': False,
     'H_KEYWORDS_ENABLED': True,
     'T_KEYWORDS_ENABLED': False,
-    'DATE_ENABLED': False,
+    'DATE_ENABLED': True,
     'REGION_ENABLED': False,
-    'EXTENT_ENABLED': False,
+    'EXTENT_ENABLED': True,
 }
 
 # Queue non-blocking notifications.
