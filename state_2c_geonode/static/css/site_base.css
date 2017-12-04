@@ -7866,3 +7866,7 @@ footer form {
 .table-user-profile-attribute {
   font-weight: bold;
 }
+
+.btn.btn-xs.pull-right {
+    display: none;
+}
