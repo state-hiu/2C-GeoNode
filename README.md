@@ -48,3 +48,5 @@ dev.secondarycities.geonode.state.gov
 ```
 $ ansible-playbook -v --private-key ~/keys/geonode_dev.pem playbook.yml
 ```
+
+**if you are having permission problems connecting with ssh, use sudo before the ansible-playbook command
