@@ -11,7 +11,7 @@ The playbook.yml file in this repo has the settings used when installing GeoNode
 
 On Amazon AWS:
 
-- create a new M3 large instance, download the pem key
+- create a new M5 large instance, download the pem key
 
 On your local machine:
 
