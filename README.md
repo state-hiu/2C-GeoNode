@@ -5,6 +5,8 @@ This repo contains the static and template files for the 2C GeoNode as well as t
 
 ## Steps for Installing GeoNode on Amazon AWS
 
+- clone this repo locally
+
 The playbook.yml file in this repo has the settings used when installing GeoNode using ansible-geonode.
 
 On Amazon AWS:
