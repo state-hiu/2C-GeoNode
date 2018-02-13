@@ -31,7 +31,7 @@ Only tested with Ansible version 2.2.1.0, to find out which version of Ansible y
 sudo apt-get update
 sudo apt-get install software-properties-common -y
 sudo apt-get install python-pip
-sudo pip install ansible=2.2.1.0
+sudo pip install 'ansible==2.2.1.0'
 ```
 
 - Install the GeoNode.geonode role on Ansible Galaxy:
