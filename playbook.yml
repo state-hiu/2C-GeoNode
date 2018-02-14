@@ -1,4 +1,5 @@
-- hosts: amazon2 
+- hosts: amazon2
+  gather_facts: yes
   remote_user: ubuntu
   gather_facts: no
   pre_tasks:
@@ -7,8 +8,8 @@
       sudo: yes
     - setup:
   vars:
-    app_name: state_2c_geonode
-    github_user: state-hiu 
+    app_name: state_2c_geonode 
+    github_user: state-hiu
     server_name: dev.secondarycities.geonode.state.gov
     repo_name: 2C-GeoNode
     deploy_user: ubuntu

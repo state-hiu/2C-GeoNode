@@ -50,3 +50,5 @@ $ ansible-playbook -v --private-key ~/keys/geonode_dev.pem playbook.yml
 ```
 
 **if you are having permission problems connecting with ssh, use sudo before the ansible-playbook command
+
+**if you are deploying on AWS and want to use a domain name from Route53 first create a new ec2 instance, then associate that instance to a static ip. Then in route53 create an A record with that elastic ip. Then within your /etc/ansible/hosts file and within the server_name of your playbook.yml file write in that domain name
