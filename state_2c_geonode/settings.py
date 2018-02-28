@@ -544,10 +544,10 @@ MISSING_THUMBNAIL = os.getenv('MISSING_THUMBNAIL','geonode/img/missing_thumb.png
 CACHE_TIME = int(os.getenv('CACHE_TIME','0'))
 
 GEOSERVER_LOCATION = os.getenv(
-    'GEOSERVER_LOCATION', 'http://localhost:8080/geoserver/'
+    'GEOSERVER_LOCATION', 'http://dev.secondarycities.geonode.state.gov/geoserver/'
 )
 GEOSERVER_PUBLIC_LOCATION = os.getenv(
-    'GEOSERVER_PUBLIC_LOCATION', 'http://localhost:8080/geoserver/'
+    'GEOSERVER_PUBLIC_LOCATION', 'http://dev.secondarycities.geonode.state.gov/geoserver/'
 )
 
 # OGC (WMS/WFS/WCS) Server Settings
@@ -604,8 +604,8 @@ _DEFAULT_CATALOGUE = {
 
         # The FULLY QUALIFIED base url to the CSW instance for this GeoNode
         'URL': '%scatalogue/csw' % SITEURL,
-        # 'URL': 'http://localhost:8080/geonetwork/srv/en/csw',
-        # 'URL': 'http://localhost:8080/deegree-csw-demo-3.0.4/services',
+        # 'URL': 'http://dev.secondarycities.geonode.state.gov/geonetwork/srv/en/csw',
+        # 'URL': 'http://dev.secondarycities.geonode.state.gov/deegree-csw-demo-3.0.4/services',
 
         # login credentials (for GeoNetwork)
         # 'USER': 'admin',
@@ -1044,7 +1044,7 @@ if 'geonode.geoserver' in INSTALLED_APPS:
     # TODO: Allow overriding with an env var
     DB_DATASTORE = str2bool(os.getenv('DB_DATASTORE', 'True'))
 
-    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', ['localhost', ])
+    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', ['localhost', 'dev.secondarycities.geonode.state.gov'])
 
 
 AUTH_IP_WHITELIST = []
