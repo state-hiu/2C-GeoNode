@@ -1,0 +1,261 @@
+@import "variables";
+
+a {
+  color: @brand-secondary;
+}
+
+.navbar-inverse {
+	background-color: @brand-darker;
+	border: 0;
+	.navbar-nav > li > a {
+		color: white;
+		font-weight: 600;
+		padding-top: 25px;
+		padding-bottom: 25px;
+                    text-transform: uppercase;
+                    font-size: @font-size-small;
+		&:hover {
+			background-color: @brand-primary;
+		}
+    }
+}
+
+.navbar-nav {
+	.dropdown-menu {
+		background-color: @brand-primary;
+		border-top: 1px solid @brand-primary;
+		a {
+			color: white;
+		}
+		li a {
+			&:hover {
+				background-color: @brand-darker;
+				color: white;
+			}
+		}
+		.divider {
+			background-color: darken(@brand-primary, 10%);
+		}
+	}
+	.search {
+		left: 15px;
+		position: relative;
+		color: #444;
+		top: 20px;
+		margin-right: 25px;
+		.fa-search {
+			position: absolute;
+			top: 8px;
+			left: 10px;
+		}
+	}
+	.search input {
+		width: 120px;
+		height: 32px;
+		border: 1px solid @brand-darker;
+		border-radius: 5px;
+		outline-width: 0;
+		text-indent: 32px;
+		-webkit-transition: width 0.2s;
+				transition: width 0.2s;
+		&:focus {
+			width: 240px;
+		}
+	}
+	.avatar img {
+		border-radius: 50%;
+		margin-bottom: -15px;
+		margin-right: 10px;
+		margin-top: -15px;
+		height: 42px;
+		width: 42px;
+	}
+	.fa-angle-down {
+		margin-left: 10px;
+	}
+}
+
+.navbar-brand {
+	background: url(../img/2C_LogoWhite2.png) 0 27px no-repeat;
+	background-size: 60%;
+          background-position: center;
+	text-indent: -9999px;
+	height: 72px;
+	width: 200px;
+}
+
+
+.home {
+	.navbar-inverse {
+		// background-color: rgba(0,0,0,0.5);
+	}
+	#wrap {
+	  margin-top: -60px;
+	  padding-bottom: 0;
+	}
+	.jumbotron {
+                    background-image: url(../img/Nepal_Pokhara_wiki_commons.JPG);
+                    background-size: cover;
+		color: white;
+		margin-bottom: 0;
+		padding: 7.5em 0 3.75em;
+		text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+		a {color: @brand-secondary;}
+		p {margin-bottom: 0;}
+		.btn-default {
+			background: rgba(0,0,0,0.2);
+			border: 2px solid white;
+			color: white;
+			font-weight: 600;
+			margin-top: 1em;
+			min-width: 320px;
+			&:hover {
+				background: rgba(0,0,0,0.4);
+			}
+		}
+	}
+          .cities {
+		background: @gray-lighter;
+		color: @brand-primary;
+                    text-align: center;
+		h1, p {text-align: center}
+		padding-bottom: 3em;
+		padding-top: 1em;
+                    h4 {color:@brand-primary}
+		a {
+                              background-color: transparent;
+                              border-color: transparent;
+                              padding-top: 10px;
+                              margin-bottom: 30px;
+		}
+                    a:hover {
+                              background-color: #fff;
+                              h3 {color:#fff;}
+                    }
+                    .cities-link .btn-default {
+                              padding-top: 10px;
+                              background-color: transparent;
+                    }
+                    .thumbnail {
+                              max-width: 250px;
+                              padding: 0;
+                              border: 0;
+                    }
+                    @media (min-width: 1200px){
+                    .container {
+                              max-width: 970px;
+                    }
+                    }
+          }
+          .cities-link {
+                    text-align: center;
+          }
+
+	.big-search {
+		background: @gray-dark;
+		color: white;
+		h1, p {text-align: center}
+		padding-bottom: 3em;
+		padding-top: 1em;
+		a {
+			color: @brand-primary;
+		}
+		.search {
+		  left: 0;
+		  position: relative;
+		  color: #444;
+		  top: 20px;
+		  padding-bottom: 2em;
+		  margin: auto;
+		  width: 50%;
+		}
+		.search input {
+		  width: 100%;
+		  height: 56px;
+		  border: 1px solid @gray-dark;
+		  border-radius: 5px;
+		  outline-width: 0;
+		  font-size: 1.5em;
+		}
+
+		.search input { text-indent: 64px;}
+		.search .fa-search {
+		  position: absolute;
+		  top: 10px;
+		  left: 15px;
+		}
+		.btn-default {
+			background: transparent;
+			border: none;
+			color: @brand-secondary;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+	#datasets {
+	    background: @brand-secondary;
+		color: white;
+		padding: 1em 0;
+		p {font-size: 14px;}
+		h4 {
+			text-transform: uppercase;
+			font-size: 14px;}
+		a {
+			color: @gray-dark;
+			&:hover {
+				text-decoration: none;
+			}
+			.category {
+				margin: 0 -15px;
+				padding: 2em 0;
+				&:hover {
+					color: #fff;
+                    background: @brand-secondary-darker;
+          		    border-radius: 4px;
+				}
+			}
+			span {
+				font-size: 4em;
+			}
+		}
+	}
+	#showcase {
+		background: @gray-lighter;
+		padding: 2em 0;
+		text-align: center;
+		.col-md-3 {
+			padding: 2em 1em;
+			img {
+				height: 180px;
+				width: 100%;
+			}
+		}
+		p {font-size: 18px;}
+	}
+}
+
+.jumbotron {
+  background: transparent;
+  color: white;
+  padding: 40px 0 60px;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+  margin-top: -10px;
+  a {
+    color: @brand-secondary;
+    }
+}
+
+footer {
+  color: white;
+  padding: 1.5em;
+  a {
+	  color: @brand-secondary;
+  	  &:hover {
+		  color: darken(@brand-warning, 13.5%)
+	  }
+  }
+  form {
+	  color: @text-color;
+  }
+}

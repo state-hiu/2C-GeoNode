@@ -1,0 +1,262 @@
+a {
+  color: #18bc9c;
+}
+.navbar-inverse {
+  background-color: #2c3e50;
+  border: 0;
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: white;
+  font-weight: 600;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+.navbar-inverse .navbar-nav > li > a:hover {
+  background-color: #3b679c;
+}
+.navbar-nav .dropdown-menu {
+  background-color: #3b679c;
+  border-top: 1px solid #3b679c;
+}
+.navbar-nav .dropdown-menu a {
+  color: white;
+}
+.navbar-nav .dropdown-menu li a:hover {
+  background-color: #2c3e50;
+  color: white;
+}
+.navbar-nav .dropdown-menu .divider {
+  background-color: #2d4f77;
+}
+.navbar-nav .search {
+  left: 15px;
+  position: relative;
+  color: #444;
+  top: 20px;
+  margin-right: 25px;
+}
+.navbar-nav .search .fa-search {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+}
+.navbar-nav .search input {
+  width: 120px;
+  height: 32px;
+  border: 1px solid #2c3e50;
+  border-radius: 5px;
+  outline-width: 0;
+  text-indent: 32px;
+  -webkit-transition: width 0.2s;
+  transition: width 0.2s;
+}
+.navbar-nav .search input:focus {
+  width: 240px;
+}
+.navbar-nav .avatar img {
+  border-radius: 50%;
+  margin-bottom: -15px;
+  margin-right: 10px;
+  margin-top: -15px;
+  height: 42px;
+  width: 42px;
+}
+.navbar-nav .fa-angle-down {
+  margin-left: 10px;
+}
+.navbar-brand {
+  background: url(../img/2C_LogoWhite2.png) 0 27px no-repeat;
+  background-size: 60%;
+  background-position: center;
+  text-indent: -9999px;
+  height: 72px;
+  width: 200px;
+}
+.home #wrap {
+  margin-top: -60px;
+  padding-bottom: 0;
+}
+.home .jumbotron {
+  background-image: url(../img/Nepal_Pokhara_wiki_commons.JPG);
+  background-size: cover;
+  color: white;
+  margin-bottom: 0;
+  padding: 7.5em 0 3.75em;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+}
+.home .jumbotron a {
+  color: #18bc9c;
+}
+.home .jumbotron p {
+  margin-bottom: 0;
+}
+.home .jumbotron .btn-default {
+  background: rgba(0, 0, 0, 0.2);
+  border: 2px solid white;
+  color: white;
+  font-weight: 600;
+  margin-top: 1em;
+  min-width: 320px;
+}
+.home .jumbotron .btn-default:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+.home .cities {
+  background: #eeeeee;
+  color: #3b679c;
+  text-align: center;
+  padding-bottom: 3em;
+  padding-top: 1em;
+}
+.home .cities h1,
+.home .cities p {
+  text-align: center;
+}
+.home .cities h4 {
+  color: #3b679c;
+}
+.home .cities a {
+  background-color: transparent;
+  border-color: transparent;
+  padding-top: 10px;
+  margin-bottom: 30px;
+}
+.home .cities a:hover {
+  background-color: #fff;
+}
+.home .cities a:hover h3 {
+  color: #fff;
+}
+.home .cities .cities-link .btn-default {
+  padding-top: 10px;
+  background-color: transparent;
+}
+.home .cities .thumbnail {
+  max-width: 250px;
+  padding: 0;
+  border: 0;
+}
+@media (min-width: 1200px) {
+  .home .cities .container {
+    max-width: 970px;
+  }
+}
+.home .cities-link {
+  text-align: center;
+}
+.home .big-search {
+  background: #333333;
+  color: white;
+  padding-bottom: 3em;
+  padding-top: 1em;
+}
+.home .big-search h1,
+.home .big-search p {
+  text-align: center;
+}
+.home .big-search a {
+  color: #3b679c;
+}
+.home .big-search .search {
+  left: 0;
+  position: relative;
+  color: #444;
+  top: 20px;
+  padding-bottom: 2em;
+  margin: auto;
+  width: 50%;
+}
+.home .big-search .search input {
+  width: 100%;
+  height: 56px;
+  border: 1px solid #333333;
+  border-radius: 5px;
+  outline-width: 0;
+  font-size: 1.5em;
+}
+.home .big-search .search input {
+  text-indent: 64px;
+}
+.home .big-search .search .fa-search {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+}
+.home .big-search .btn-default {
+  background: transparent;
+  border: none;
+  color: #18bc9c;
+}
+.home .big-search .btn-default:hover {
+  text-decoration: underline;
+}
+.home #datasets {
+  background: #18bc9c;
+  color: white;
+  padding: 1em 0;
+}
+.home #datasets p {
+  font-size: 14px;
+}
+.home #datasets h4 {
+  text-transform: uppercase;
+  font-size: 14px;
+}
+.home #datasets a {
+  color: #333333;
+}
+.home #datasets a:hover {
+  text-decoration: none;
+}
+.home #datasets a .category {
+  margin: 0 -15px;
+  padding: 2em 0;
+}
+.home #datasets a .category:hover {
+  color: #fff;
+  background: #128770;
+  border-radius: 4px;
+}
+.home #datasets a span {
+  font-size: 4em;
+}
+.home #showcase {
+  background: #eeeeee;
+  padding: 2em 0;
+  text-align: center;
+}
+.home #showcase .col-md-3 {
+  padding: 2em 1em;
+}
+.home #showcase .col-md-3 img {
+  height: 180px;
+  width: 100%;
+}
+.home #showcase p {
+  font-size: 18px;
+}
+.jumbotron {
+  background: transparent;
+  color: white;
+  padding: 40px 0 60px;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+  margin-top: -10px;
+}
+.jumbotron a {
+  color: #18bc9c;
+}
+footer {
+  color: white;
+  padding: 1.5em;
+}
+footer a {
+  color: #18bc9c;
+}
+footer a:hover {
+  color: #eb6b00;
+}
+footer form {
+  color: #333333;
+}

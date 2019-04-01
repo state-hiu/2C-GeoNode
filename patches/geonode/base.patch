@@ -1,0 +1,32 @@
+diff --git a/geonode/templates/base.html b/geonode/templates/base.html
+index 607aa971e..a07fe2e4e 100644
+--- a/geonode/templates/base.html
++++ b/geonode/templates/base.html
+@@ -213,18 +213,6 @@
+ 
+            {% endblock my_extra_right_tab %}
+ 
+-            <li>
+-              <div class="search">
+-                <form id="search" action="{% url "search" %}" >
+-                  <span class="fa fa-search"></span>
+-                  {% if HAYSTACK_SEARCH %}
+-                  <input id="search_input" type="text" placeholder="Search" name="q">
+-                  {% else %}
+-                  <input id="search_input" type="text" placeholder="Search" name="title__icontains">
+-                  {% endif %}
+-                </form>
+-              </div>
+-          </li>
+             {% if not user.is_authenticated and ACCOUNT_OPEN_SIGNUP %}
+             <li><a href="{% url "account_signup" %}">{% trans "Register" %}</a></li>
+             {% endif %}
+@@ -373,7 +361,7 @@
+           {% endif %}
+           {% endblock contactus %}
+           <ul class="list-unstyled">
+-            <li>{% trans "Powered by" %} <a href="http://geonode.org">{% trans "GeoNode" %}</a> <em>{% trans "version" %} {{ VERSION }}</em></li>
++            <li>Made possible by <a href="http://geonode.org">{% trans "GeoNode" %}</a> <em>{% trans "version" %} {{ VERSION }}</em></li>
+             <li><a href="{% url "developer" %}">{% trans "Developers" %}</a> | <a href="{% url "about" %}">{% trans "About" %}</a><li>
+           </ul>
+           <label class="hidden">{% trans "Language" %}</label>

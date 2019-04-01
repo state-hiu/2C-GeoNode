@@ -1,0 +1,16 @@
+diff --git a/django/contrib/admin/templates/admin/base_site.html b/django/contrib/admin/templates/admin/base_site.html
+index cae0a69..06344e4 100644
+--- a/django/contrib/admin/templates/admin/base_site.html
++++ b/django/contrib/admin/templates/admin/base_site.html
+@@ -1,9 +1,9 @@
+ {% extends "admin/base.html" %}
+ 
+-{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
++{% block title %}{{ title }} | Secondary Cities Admin{% endblock %}
+ 
+ {% block branding %}
+-<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></h1>
++<h1 id="site-name"><a href="{% url 'admin:index' %}">Secondary Cities Admin</a></h1>
+ {% endblock %}
+ 
+ {% block nav-global %}{% endblock %}

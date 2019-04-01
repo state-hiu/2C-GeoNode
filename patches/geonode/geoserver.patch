@@ -1,0 +1,62 @@
+diff --git a/geonode/geoserver/signals.py b/geonode/geoserver/signals.py
+index 281ed9bb0..6a5f3a57b 100644
+--- a/geonode/geoserver/signals.py
++++ b/geonode/geoserver/signals.py
+@@ -74,16 +74,24 @@ def geoserver_pre_save(*args, **kwargs):
+     # nothing to do here, processing is pushed to post-save
+     pass
+ 
+-
+ @on_ogc_backend(BACKEND_PACKAGE)
+ def geoserver_post_save(instance, sender, **kwargs):
++
++    # If fixtures were added via loaddata, don't run post_save.
++    if kwargs.get('raw', True):
++        return
++
+     from geonode.messaging import producer
+     # this is attached to various models, (ResourceBase, Document)
+     # so we should select what will be handled here
+     if isinstance(instance, Layer):
+         instance_dict = model_to_dict(instance)
+         payload = json_serializer_producer(instance_dict)
+-        producer.geoserver_upload_layer(payload)
++
++        try:
++           producer.geoserver_upload_layer(payload)
++        except:
++            return
+ 
+         if instance.storeType != 'remoteStore':
+             logger.info("... Creating Thumbnail for Layer [%s]" % (instance.alternate))
+@@ -105,6 +113,10 @@ def geoserver_post_save_local(instance, *args, **kwargs):
+         * Metadata Links,
+         * Point of Contact name and url
+     """
++
++    if kwargs.get('raw', True):
++        return
++
+     # Don't run this signal if is a Layer from a remote service
+     if getattr(instance, "remote_service", None) is not None:
+         return
+@@ -158,7 +170,7 @@ def geoserver_post_save_local(instance, *args, **kwargs):
+     else:
+         msg = "There isn't a geoserver resource for this layer: %s" % instance.name
+         logger.exception(msg)
+-        raise Exception(msg)
++        return
+ 
+     # Get metadata links
+     metadata_links = []
+@@ -369,6 +381,10 @@ def geoserver_pre_save_maplayer(instance, sender, **kwargs):
+ 
+ 
+ def geoserver_post_save_map(instance, sender, **kwargs):
++    # If fixtures were added via loaddata, don't run post_save.
++    if kwargs.get('raw', True):
++        return
++
+     instance.set_missing_info()
+     logger.info("... Creating Thumbnail for Map [%s]" % (instance.title))
+     create_gs_thumbnail(instance, overwrite=False, check_bbox=True)

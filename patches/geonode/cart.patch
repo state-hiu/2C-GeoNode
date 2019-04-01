@@ -1,0 +1,21 @@
+diff --git a/geonode/static/geonode/js/search/cart.js b/geonode/static/geonode/js/search/cart.js
+index f0f24100e..73659c4c0 100644
+--- a/geonode/static/geonode/js/search/cart.js
++++ b/geonode/static/geonode/js/search/cart.js
+@@ -127,12 +127,15 @@
+       this.removeItem = function(item){
+         if(this.getItemById(item.id) !== null){
+           var cart = this.getCart();
+-          angular.forEach(cart.items, function(cart_item, index){
++          $(`#cart-${item.id} i`).removeClass(this.getFaClass(item.id))
++	  
++	  angular.forEach(cart.items, function(cart_item, index){
+             if(cart_item.id === item.id){
+               cart.items.splice(index, 1);
+               $cookies.remove(cart_item['uuid']);
+             }
+           });
++	  $(`#cart-${item.id} i`).addClass(this.getFaClass(item.id))
+         }
+       }
+ 

@@ -1,0 +1,19 @@
+diff --git a/geonode/base/templates/base/_resourcebase_snippet.html b/geonode/base/templates/base/_resourcebase_snippet.html
+index 05e3e0d1c..e91a4ad5f 100644
+--- a/geonode/base/templates/base/_resourcebase_snippet.html
++++ b/geonode/base/templates/base/_resourcebase_snippet.html
+@@ -1,12 +1,12 @@
+ {% load i18n %}
+ {% verbatim %}
+-<div class="row resourcebase-snippet">
++<div id="explore-layer-list" class="row resourcebase-snippet" data-new-map="{% endverbatim %}{% url "new_map" %}{% verbatim %}">
+   <div ng-if="results.length == 0" ng-cloak>
+     {% endverbatim %}
+     <div><h3>{% trans "No content created yet." %}</h3></div>
+     {% verbatim %}
+   </div>
+-  <article ng-repeat="item in results" resource_id="{{ item.id }}" ng-cloak class="ng-cloak">
++  <article ng-repeat="item in results track by item.uuid" resource_id="{{ item.id }}" ng-cloak class="ng-cloak">
+     <div class="col-lg-12 item-container">
+       <div class="col-lg-12 profile-avatar">
+         <div class="col-lg-4 item-thumb">

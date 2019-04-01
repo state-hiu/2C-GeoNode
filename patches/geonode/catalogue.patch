@@ -1,0 +1,22 @@
+diff --git a/geonode/catalogue/models.py b/geonode/catalogue/models.py
+index c1325f5a1..0f267ffe8 100644
+--- a/geonode/catalogue/models.py
++++ b/geonode/catalogue/models.py
+@@ -42,6 +42,9 @@ def catalogue_pre_delete(instance, sender, **kwargs):
+ def catalogue_post_save(instance, sender, **kwargs):
+     """Get information from catalogue"""
+ 
++    # If fixtures were added via loaddata, don't run post_save.
++    if kwargs.get('raw', True):
++        return
+     # if layer is not to be published, temporarily
+     # change publish state to be able to update
+     # properties (#2332)
+@@ -108,6 +111,7 @@ def catalogue_pre_save(instance, sender, **kwargs):
+     """Send information to catalogue"""
+     return
+ 
++
+     # no idea why this was removed in notifications branch
+     record = None
+ 

@@ -1,0 +1,25 @@
+diff --git a/haystack/backends/elasticsearch_backend.py b/haystack/backends/elasticsearch_backend.py
+index c17ecba..aa56465 100644
+--- a/haystack/backends/elasticsearch_backend.py
++++ b/haystack/backends/elasticsearch_backend.py
+@@ -517,17 +517,13 @@ class ElasticsearchSearchBackend(BaseSearchBackend):
+         if end_offset is not None and end_offset > start_offset:
+             search_kwargs['size'] = end_offset - start_offset
+ 
+-        try:
++            search_kwargs['sort'] = ['_score' ]
+             raw_results = self.conn.search(body=search_kwargs,
+                                            index=self.index_name,
+                                            doc_type='modelresult',
+                                            _source=True)
+-        except elasticsearch.TransportError as e:
+-            if not self.silently_fail:
+-                raise
+-
+-            self.log.error("Failed to query Elasticsearch using '%s': %s", query_string, e, exc_info=True)
+-            raw_results = {}
++            print(search_kwargs)
++            self.log.error(search_kwargs)
+ 
+         return self._process_results(raw_results,
+                                      highlight=kwargs.get('highlight'),

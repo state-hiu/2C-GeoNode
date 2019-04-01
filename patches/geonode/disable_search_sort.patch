@@ -1,0 +1,13 @@
+diff --git a/geonode/templates/search/_search_content.html b/geonode/templates/search/_search_content.html
+index 2eea9b329..cb96b0173 100644
+--- a/geonode/templates/search/_search_content.html
++++ b/geonode/templates/search/_search_content.html
+@@ -50,7 +50,7 @@
+   <div class="col-md-9">
+     <div class="row">
+       <div class="col-md-10"><span style="font-size: 34px;" ng-bind="total_counts + ' {{ facet_type | title }} found'"></span></div>
+-      <div class="col-md-2">{% include "search/_sort_filters.html" %}</div>
++      {% comment %}     <div class="col-md-2">{% include "search/_sort_filters.html" %}</div>  {% endcomment %}
+     </div>
+     <div class="row">
+       <div class="col-md-12 grid-spacer">
