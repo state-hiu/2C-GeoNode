@@ -6,8 +6,8 @@ from geonode.maps.models import Map
 from geonode.layers.models import Layer, Style
 from geonode.utils import designals, resignals
 
-source_str="dev.secondarycities.geonode.state.gov"
-target_str="secondarycities.geonode.state.gov"
+source_str="147.102.109.19"
+target_str="2c.puerti.co"
 
 print "Deactivating GeoNode Signals..."
 designals()
