@@ -3,6 +3,7 @@ django.setup()
 import decimal
 from geonode.layers.models import Layer
 from geonode.base.models import ResourceBase
+from geonode.layers.utils import create_thumbnail
 from geonode.geoserver.helpers import *
 
 def create_layer_thumbnail(layer):
@@ -28,7 +29,7 @@ def create_layer_thumbnail(layer):
     	if ((layer.bbox[2]-layer.bbox[0]>0.0002) or (layer.bbox[3]-layer.bbox[1]>0.0002)):
     		params['bbox'] = layer.bbox_string
     	else:
-    		params['bbox'] = "%s,%s,%s,%s" % (str(layer.bbox[0]-decimal.Decimal('0.01')), str(layer.bbox[1]-decimal.Decimal('0.01')), str(layer.bbox[2]+decimal.Decimal('0.01')), str(layer.bbox[3]+decimal.Decimal('0.01')))
+    		params['bbox'] = "%s,%s,%s,%s" % (str(layer.bbox[2]-decimal.Decimal('0.01')), str(layer.bbox[3]-decimal.Decimal('0.01')), str(layer.bbox[0]+decimal.Decimal('0.01')), str(layer.bbox[1]+decimal.Decimal('0.01')))
         check_bbox = True
 
     p = "&".join("%s=%s" % item for item in params.items())
