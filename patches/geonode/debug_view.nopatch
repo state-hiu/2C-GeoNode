@@ -1,0 +1,22 @@
+diff --git a/geonode/layers/views.py b/geonode/layers/views.py
+index 021f4bdb5..27bec051e 100644
+--- a/geonode/layers/views.py
++++ b/geonode/layers/views.py
+@@ -638,6 +638,7 @@ def layer_detail(request, layername, template='layers/layer_detail.html'):
+                   item.link_type == 'image']
+     links_download = [item for idx, item in enumerate(
+         links) if item.link_type in ('data', 'original')]
++    
+     for item in links_view:
+         if item.url and access_token and 'access_token' not in item.url:
+             params = {'access_token': access_token}
+@@ -660,6 +661,9 @@ def layer_detail(request, layername, template='layers/layer_detail.html'):
+                 name__in=settings.DOWNLOAD_FORMATS_RASTER)
+         context_dict["links_download"] = links_download
+ 
++    context_dict["links"] = links_view
++    context_dict["links_download"] = links_download
++
+     if settings.SOCIAL_ORIGINS:
+         context_dict["social_links"] = build_social_links(request, layer)
+     layers_names = layer.alternate
