@@ -309,8 +309,6 @@ GEONODE_INTERNAL_APPS = (
 
 GEONODE_CONTRIB_APPS = (
     # GeoNode Contrib Apps
-    'geonode.contrib.metadataxsl',
-    'geonode.contrib.ows_api',
 )
 
 # Uncomment the following line to enable contrib apps
@@ -1259,10 +1257,10 @@ SERVICE_UPDATE_INTERVAL = 0
 
 SEARCH_FILTERS = {
     'TEXT_ENABLED': True,
-    'TYPE_ENABLED': False,
-    'CATEGORIES_ENABLED': False,
+    'TYPE_ENABLED': True,
+    'CATEGORIES_ENABLED': True,
     'OWNERS_ENABLED': False,
-    'KEYWORDS_ENABLED': False,
+    'KEYWORDS_ENABLED': True,
     'H_KEYWORDS_ENABLED': False,
     'T_KEYWORDS_ENABLED': False,
     'DATE_ENABLED': False,
@@ -1527,11 +1525,6 @@ if USE_GEOSERVER:
 # THESAURI = [{'name':'inspire_themes', 'required':False, 'filter':True}]
 THESAURI = []
 
-# use when geonode.contrib.risks is in installed apps.
-RISKS = {'DEFAULT_LOCATION': None,
-         'PDF_GENERATOR': {'NAME': 'wkhtml2pdf',
-                           'BIN': '/usr/bin/wkhtml2pdf',
-                           'ARGS': []}}
 
 # Each uploaded Layer must be approved by an Admin before becoming visible
 ADMIN_MODERATE_UPLOADS = False
@@ -1547,13 +1540,6 @@ MONITORING_DATA_TTL = timedelta(days=7)
 # this will disable csrf check for notification config views,
 # use with caution - for dev purpose only
 MONITORING_DISABLE_CSRF = False
-
-if MONITORING_ENABLED:
-    if 'geonode.contrib.monitoring' not in INSTALLED_APPS:
-        INSTALLED_APPS += ('geonode.contrib.monitoring',)
-    if 'geonode.contrib.monitoring.middleware.MonitoringMiddleware' not in MIDDLEWARE_CLASSES:
-        MIDDLEWARE_CLASSES += \
-            ('geonode.contrib.monitoring.middleware.MonitoringMiddleware',)
 
 GEOIP_PATH = os.path.join(PROJECT_ROOT, 'GeoIPCities.dat')
 # If this option is enabled, Resources belonging to a Group won't be
@@ -1655,42 +1641,6 @@ GEOTIFF_IO_BASE_URL = os.getenv(
     'GEOTIFF_IO_BASE_URL', 'https://app.geotiff.io'
 )
 
-# WorldMap settings
-if USE_WORLDMAP:
-    GEONODE_CLIENT_LOCATION = '/static/worldmap_client/'
-    INSTALLED_APPS += (
-        'geoexplorer-worldmap',
-        'geonode.contrib.worldmap.gazetteer',
-        'geonode.contrib.worldmap.wm_extra',
-        'geonode.contrib.worldmap.mapnotes',
-        'geonode.contrib.createlayer',
-    )
-    # WorldMap Gazetter settings
-    USE_GAZETTEER = True
-    GAZETTEER_DB_ALIAS = 'default'
-    GAZETTEER_FULLTEXTSEARCH = False
-    # external services to be used by the gazetteer
-    GAZETTEER_SERVICES = 'worldmap,geonames,nominatim'
-    # this is the GeoNames key which is needed by the WorldMap Gazetteer
-    GAZETTEER_GEONAMES_USER = os.getenv('GEONAMES_USER', 'your-key-here')
-    WM_COPYRIGHT_URL = "http://gis.harvard.edu/"
-    WM_COPYRIGHT_TEXT = "Center for Geographic Analysis"
-    DEFAULT_MAP_ABSTRACT = """
-        <h3>The Harvard WorldMap Project</h3>
-        <p>WorldMap is an open source web mapping system that is currently
-        under construction. It is built to assist academic research and
-        teaching as well as the general public and supports discovery,
-        investigation, analysis, visualization, communication and archiving
-        of multi-disciplinary, multi-source and multi-format data,
-        organized spatially and temporally.</p>
-    """
-    # these are optionals
-    USE_GOOGLE_STREET_VIEW = strtobool(os.getenv('USE_GOOGLE_STREET_VIEW', 'False'))
-    GOOGLE_MAPS_API_KEY = os.getenv('GOOGLE_MAPS_API_KEY', 'your-key-here')
-    USE_HYPERMAP = strtobool(os.getenv('USE_HYPERMAP', 'False'))
-    HYPERMAP_REGISTRY_URL = os.getenv('HYPERMAP_REGISTRY_URL', 'http://localhost:8001')
-    SOLR_URL = os.getenv('SOLR_URL', 'http://localhost:8983/solr/hypermap/select/')
-    MAPPROXY_URL = os.getenv('MAPPROXY_URL', 'http://localhost:8001')
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 MEDIA_ROOT = os.getenv('MEDIA_ROOT', os.path.join(PROJECT_ROOT, "uploaded"))
@@ -2170,18 +2120,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 GEOIP_PATH = "/usr/local/share/GeoIP"
 
 # add following lines to your local settings to enable monitoring
-MONITORING_ENABLED = True
-
-if MONITORING_ENABLED:
-    if 'geonode.contrib.monitoring' not in INSTALLED_APPS:
-        INSTALLED_APPS += ('geonode.contrib.monitoring',)
-    if 'geonode.contrib.monitoring.middleware.MonitoringMiddleware' not in MIDDLEWARE_CLASSES:
-        MIDDLEWARE_CLASSES += \
-            ('geonode.contrib.monitoring.middleware.MonitoringMiddleware',)
-    MONITORING_CONFIG = None
-    MONITORING_HOST_NAME = os.getenv("MONITORING_HOST_NAME", HOSTNAME)
-    MONITORING_SERVICE_NAME = 'geonode'
-
+MONITORING_ENABLED = False
 
 # Documents Thumbnails
 UNOCONV_ENABLE = True
@@ -2255,7 +2194,6 @@ if UNOCONV_ENABLE:
     UNOCONV_EXECUTABLE = os.getenv('UNOCONV_EXECUTABLE', '/usr/bin/unoconv')
     UNOCONV_TIMEOUT = os.getenv('UNOCONV_TIMEOUT', 30)  # seconds
 
-'''
 # To enable the MapStore2 based Client enable those
 if 'geonode_mapstore_client' not in INSTALLED_APPS:
     INSTALLED_APPS += (
@@ -2335,4 +2273,6 @@ if 'geonode.geoserver' in INSTALLED_APPS:
         "format": "image/png8",
         "restUrl": "/gs/rest"
     }
-'''
+
+FAVORITE_ENABLED = False
+CREATE_LAYER = False
