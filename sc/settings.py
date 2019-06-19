@@ -1750,8 +1750,8 @@ ACCOUNT_LOGOUT_REDIRECT_URL =  os.getenv('LOGOUT_REDIRECT_URL', SITEURL)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'geonode',
-        'USER': 'geonode',
+        'NAME': 'state_2c_geonode_app',
+        'USER': 'state_2c_geonode',
         'PASSWORD': 'geonode',
         'HOST': 'db',
         'PORT': '5432',
@@ -2254,3 +2254,85 @@ UNOCONV_ENABLE = strtobool(os.getenv('UNOCONV_ENABLE', 'True'))
 if UNOCONV_ENABLE:
     UNOCONV_EXECUTABLE = os.getenv('UNOCONV_EXECUTABLE', '/usr/bin/unoconv')
     UNOCONV_TIMEOUT = os.getenv('UNOCONV_TIMEOUT', 30)  # seconds
+
+'''
+# To enable the MapStore2 based Client enable those
+if 'geonode_mapstore_client' not in INSTALLED_APPS:
+    INSTALLED_APPS += (
+        'mapstore2_adapter',
+        'geonode_mapstore_client',)
+
+GEONODE_CLIENT_LAYER_PREVIEW_LIBRARY = 'mapstore'  # DEPRECATED use HOOKSET instead
+GEONODE_CLIENT_HOOKSET = "geonode_mapstore_client.hooksets.MapStoreHookSet"
+
+MAPSTORE_DEBUG = False
+
+def get_geonode_catalogue_service():
+    if PYCSW:
+        pycsw_config = PYCSW["CONFIGURATION"]
+        if pycsw_config:
+                pycsw_catalogue = {
+                    ("%s" % pycsw_config['metadata:main']['identification_title']): {
+                        "url": CATALOGUE['default']['URL'],
+                        "type": "csw",
+                        "title": pycsw_config['metadata:main']['identification_title'],
+                        "autoload": True
+                     }
+                }
+                return pycsw_catalogue
+    return None
+
+GEONODE_CATALOGUE_SERVICE = get_geonode_catalogue_service()
+
+MAPSTORE_CATALOGUE_SERVICES = {
+    "Demo WMS Service": {
+        "url": "https://demo.geo-solutions.it/geoserver/wms",
+        "type": "wms",
+        "title": "Demo WMS Service",
+        "autoload": False
+     },
+    "Demo WMTS Service": {
+        "url": "https://demo.geo-solutions.it/geoserver/gwc/service/wmts",
+        "type": "wmts",
+        "title": "Demo WMTS Service",
+        "autoload": False
+    }
+}
+
+MAPSTORE_CATALOGUE_SELECTED_SERVICE = "Demo WMS Service"
+
+if GEONODE_CATALOGUE_SERVICE:
+    MAPSTORE_CATALOGUE_SERVICES[GEONODE_CATALOGUE_SERVICE.keys()[0]] = GEONODE_CATALOGUE_SERVICE[GEONODE_CATALOGUE_SERVICE.keys()[0]]
+    MAPSTORE_CATALOGUE_SELECTED_SERVICE = GEONODE_CATALOGUE_SERVICE.keys()[0]
+
+DEFAULT_MS2_BACKGROUNDS = [{
+        "type": "osm",
+        "title": "Open Street Map",
+        "name": "mapnik",
+        "source": "osm",
+        "group": "background",
+        "visibility": True
+    },
+    {
+        "group": "background",
+        "name": "osm",
+        "source": "mapquest",
+        "title": "MapQuest OSM",
+        "type": "mapquest",
+        "visibility": False
+    }
+]
+
+MAPSTORE_BASELAYERS = DEFAULT_MS2_BACKGROUNDS
+
+if 'geonode.geoserver' in INSTALLED_APPS:
+    LOCAL_GEOSERVER = {
+        "type": "wms",
+        "url": OGC_SERVER['default']['PUBLIC_LOCATION'] + "wms",
+        "visibility": True,
+        "title": "Local GeoServer",
+        "group": "background",
+        "format": "image/png8",
+        "restUrl": "/gs/rest"
+    }
+'''
