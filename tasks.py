@@ -70,16 +70,16 @@ amqp://guest:guest@rabbitmq:5672/ >> {override_fn}".format(**envs), pty=True)
 
 @task
 def migrations(ctx):
-    print "**************************migrations*******************************"
-    ctx.run("python manage.py makemigrations --noinput --merge --settings={0}".format(
-        _localsettings()
-    ), pty=True)
-    ctx.run("python manage.py makemigrations --noinput --settings={0}".format(
-        _localsettings()
-    ), pty=True)
-    ctx.run("python manage.py migrate --noinput --settings={0}".format(
-        _localsettings()
-    ), pty=True)
+#    print "**************************migrations*******************************"
+##    ctx.run("python manage.py makemigrations --noinput --merge --settings={0}".format(
+#        _localsettings()
+#    ), pty=True)
+#    ctx.run("python manage.py makemigrations --noinput --settings={0}".format(
+#        _localsettings()
+#    ), pty=True)
+#    ctx.run("python manage.py migrate --noinput --settings={0}".format(
+#        _localsettings()
+#    ), pty=True)
     ctx.run("python manage.py updategeoip --settings={0}".format(
         _localsettings()
     ), pty=True)
