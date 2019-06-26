@@ -11,7 +11,7 @@ services:
       GEONODE_DATABASE: state_2c_geonode_app
       SITEURL: https://2c.puerti.co/
       ALLOWED_HOSTS: "['2c.puerti.co', 'localhost']"
-      GEOSERVER_PUBLIC_LOCATION: https://2c.puerti.co/gs/
+      GEOSERVER_PUBLIC_LOCATION: https://2c.puerti.co/geoserver/
       GEOSERVER_WEB_UI_LOCATION: https://2c.puerti.co/geoserver/
       HAYSTACK_SEARCH: 'True'
       SKIP_PERMS_FILTER: 'True'
@@ -36,3 +36,19 @@ services:
       NGINX_BASE_URL: https://2c.puerti.co/
     volumes:
       - '/home/ubuntu/backup:/backup'
+
+
+volumes:
+  geoserver-data-dir:
+    external:
+       name: ${COMPOSE_PROJECT_NAME}-gsdatadir
+       #  dbdata:
+       #    external:
+       #    name: ${COMPOSE_PROJECT_NAME}-dbdata
+       #  dbbackups:
+       #    external:
+       #     driver: ${BACKUPS_VOLUME_DRIVER}
+       #    name: ${COMPOSE_PROJECT_NAME}-dbbackups
+  statics:
+    external:
+      name: ${COMPOSE_PROJECT_NAME}-statics

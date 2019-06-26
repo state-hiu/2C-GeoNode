@@ -1700,8 +1700,10 @@ ACCOUNT_LOGOUT_REDIRECT_URL =  os.getenv('LOGOUT_REDIRECT_URL', SITEURL)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'state_2c_geonode_app',
-        'USER': 'state_2c_geonode',
+      #  'NAME': 'state_2c_geonode_app',
+      #  'USER': 'state_2c_geonode',
+        'NAME': os.getenv('GEONODE_DATABASE_NAME', 'geonode'),
+        'USER': os.getenv('GEONODE_DATABASE_USER', 'geonode'),
         'PASSWORD': 'geonode',
         'HOST': 'db',
         'PORT': '5432',
