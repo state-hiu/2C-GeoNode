@@ -1,0 +1,432 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load base_tags %}
+
+{% block title %} {% trans "2C GeoNode" %} {% endblock %}
+
+{% block body_class %}home{% endblock %}
+
+
+{% block middle %}
+  {{ block.super }}
+  {% block hero %}
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <div class="jumbotron">
+  	<div class="container">
+  		<h1>{% trans "Secondary Cities GeoNode" %}</h1>
+  		<p></p>
+  		<p>{% blocktrans %}Building partnerships to create geospatial data on secondary cities (2C){% endblocktrans %}</p>
+		<!--<p>{% blocktrans %}If you have any questions about the software or service, join our <a href="http://lists.osgeo.org/cgi-bin/mailman/listinfo/geonode-users">mailing list</a>.{% endblocktrans %}</p>
+  		<a class="btn btn-default btn-lg" target="_blank" href="http://docs.geonode.org/en/master/tutorials/users/index.html" role="button">{% blocktrans %}Get Started &raquo;{% endblocktrans %}</a>-->
+  	</div>
+  </div>
+  {% endblock %}
+
+  {% block mainbody %}
+
+  <link rel="icon" type="image/png" sizes="16x16" href="static/favicon-16x16.png">
+
+  <div class="cities">
+  	<div class="container">
+                    <div class="row">
+                              <div class="container">
+                      		<h1>{% trans "Cities" %}</h1>
+                      		<div class="cities-links">
+                                                  <a href="/search/?title__icontains=Cusco" class="btn btn-default" role="button">
+                                                  <img class="thumbnail" src="/static/img/Cusco3.jpg">
+                                                  <h4>Cusco, Peru</h4>
+                                                  <!--<h5 class="text-center">No datasets</h5>-->
+                                                  </a>
+                                                  <a href="/search/?title__icontains=Denpasar" class="btn btn-default" role="button">
+                                                  <img class="thumbnail" src="/static/img/denpasar3.jpg">
+                                                  <h4>Denpasar, Indonesia</h4>
+                                                  <!--<h5 class="text-center">No datasets</h5>-->
+                                                  </a>
+					          </br>
+
+                                                  <a href="/search/?title__icontains=Douala" class="btn btn-default" role="button">
+                                                  <img class="thumbnail" src="/static/img/douala_web4.jpg">
+                                                  <h4>Douala, Cameroon</h4>
+                                                  <!--<h5 class="text-center">No datasets</h5>-->
+                                                  </a>
+                                                  <a href="/search/?title__icontains=Esmeraldas" class="btn btn-default" role="button">
+                                                  <img class="thumbnail" src="/static/img/esmeraldas_web.jpg">
+                                                  <h4>Esmeraldas, Ecuador</h4>
+                                                  <!--<h5 class="text-center">No datasets</h5>-->
+                                                  </a>
+						  <a href="/search/?title__icontains=Kharkiv" class="btn btn-default" role="button">
+                                                  <img class="thumbnail" src="/static/img/Kharkiv4.jpg">
+                                                  <h4>Kharkiv, Ukraine</h4>
+                                                  <!--<h5 class="text-center">No datasets</h5>-->
+						  </a>
+
+						  </br>
+
+						  <a href="/search/?title__icontains=Medellin" class="btn btn-default" role="button">
+                                                  <img class="thumbnail" src="/static/img/medellin4.jpg">
+                                                  <h4>Medellín, Colombia</h4>
+                                                  <!--<h5 class="text-center">No datasets</h5>-->
+                                                  <a href="/search/?title__icontains=Mekelle" class="btn btn-default" role="button">
+                                                  <img class="thumbnail" src="/static/img/mekelle3.jpg">
+                                                  <h4>Mekelle, Ethiopia</h4>
+                                                  <!--<h5 class="text-center">No datasets</h5>-->
+                                                  </a>
+						  </br>
+                                                  <a href="/search/?title__icontains=Pokhara" class="btn btn-default" role="button">
+                                                  <img class="thumbnail" src="/static/img/pokhara3.jpg">
+                                                  <h4>Pokhara, Nepal</h4>
+                                                  <!--<h5 class="text-center">No datasets</h5>-->
+                                                  </a>
+						  <a href="/search/?title__icontains=Port%20Harcourt" class="btn btn-default" role="button">
+                                                  <img class="thumbnail" src="/static/img/portharcourt_web.jpg">
+                                                  <h4>Port Harcourt, Nigeria</h4>
+                                                  <!--<h5 class="text-center">No datasets</h5>-->
+                                                  </a>
+						  <a href="/search/?title__icontains=santiago" class="btn btn-default" role="button">
+                                                  <img class="thumbnail" src="/static/img/santiago_web.jpg">
+                                                  <h4>Santiago, Dominican Republic</h4>
+                                                  <!--<h5 class="text-center">No datasets</h5>-->
+                                                  </a>
+                      		</div>
+                              </div>
+                    </div>
+  	</div>
+  </div>
+
+<!--
+  <div class="big-search">
+  	<div class="container">
+  		<h1>{% trans "Search for Data." %}</h1>
+  		<div class="search">
+  			<form id="search" action="{% url "search" %}" >
+  				<span class="fa fa-search fa-2x"></span>
+  				{% if HAYSTACK_SEARCH %}
+  				<input id="search_input" type="text" placeholder="Search" class="form-control" name="q">
+  				{% else %}
+
+
+  				<input id="search_input" type="text" placeholder="Search" class="form-control" name="title__icontains">
+  				{% endif %}
+  			</form>
+  		</div>
+  		<p><a class="btn btn-default btn-lg" href="/search/">Advanced Search</a></p>
+  	</div>
+  </div>
+-->
+  <!--section id="datasets">
+  	<div class="container">
+  		<div class="row">
+  			<div class="container text-center">
+  				<h1>Discover the available datasets.</h1>
+  				<div class="col-xs-4 col-sm-2">
+  					<a href="/search/?limit=100&offset=0&category__identifier__in=boundaries&category__identifier__in=planningCadastre" data-toggle="tooltip" data-placement="auto"
+  						title="Political and administrative boundaries, land use maps, zoning maps, cadastral surveys, land ownership.">
+  						<div class="category">
+  							<i class="fa fa-flag fa-4x"></i>
+  							<h4>Boundaries</h4>
+  						</div>
+  					</a>
+  				</div>
+  				<div class="col-xs-4 col-sm-2">
+  					<a href="/search/?limit=100&offset=0&category__identifier__in=climatologyMeteorologyAtmosphere" data-toggle="tooltip" data-placement="auto"
+  						title="Cloud cover, weather, climate, atmospheric conditions, climate change, precipitation" >
+  						<div class="category">
+  							<i class="fa fa-umbrella fa-4x"></i>
+  							<h4>Climate</h4>
+  						</div>
+  					</a>
+  				</div>
+				<div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=demographics" data-toggle="tooltip" data-placement="auto"
+                                                title="Settlements, anthropology, archaeology, education, traditional beliefs, manners and customs, demographic data, recreational areas and activities, social impact assessments, crime and justice, census information. Economic activities, conditions and employment." >
+                                                <div class="category">
+                                                        <i class="fa fa-male fa-4x"></i>
+                                                        <h4>Demographics</h4>
+                                                </div>
+                                        </a>
+                                </div>
+				 <div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=economy" data-toggle="tooltip" data-placement="auto"
+                                                title="Location and type of industries, businesses, markets/bazaars; electric power and oil/gas networks." >
+                                                <div class="category">
+                                                        <i class="fa fa-money fa-4x"></i>
+                                                        <h4>Economy</h4>
+                                                </div>
+                                        </a>
+                                </div>
+				 <div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=education" data-toggle="tooltip" data-placement="auto"
+                                                title="Location and type of schools; literacy rates." >
+                                                <div class="category">
+                                                        <i class="fa fa-graduation-cap fa-4x"></i>
+                                                        <h4>Education</h4>
+                                                </div>
+                                        </a>
+                                </div>
+				 <div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=energy" data-toggle="tooltip" data-placement="auto"
+                                                title="Power lines; electricity; power plants; consumption rates" >
+                                                <div class="category">
+                                                        <i class="fa fa-plug fa-4x"></i>
+                                                        <h4>Energy</h4>
+                                                </div>
+                                        </a>
+                                </div>
+  				<div class="col-xs-4 col-sm-2">
+  					<a href="/search/?limit=100&offset=0&category__identifier__in=environment" data-toggle="tooltip" data-placement="auto"
+  						title="Environment; natural resources; ecology" >
+  						<div class="category">
+  							<i class="fa fa-leaf fa-4x"></i>
+  							<h4>Environment</h4>
+  						</div>
+  					</a>
+  				</div>
+				<div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=ethnicity" data-toggle="tooltip" data-placement="auto"
+                                                title="Ethnicity" >
+                                                <div class="category">
+                                                        <i class="fa fa-flag-checkered fa-4x"></i>
+                                                        <h4>Ethnicity</h4>
+                                                </div>
+                                        </a>
+                                </div>
+				<div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=finance" data-toggle="tooltip" data-placement="auto"
+                                                title="" >
+                                                <div class="category">
+                                                        <i class="fa fa-line-chart fa-4x"></i>
+                                                        <h4>Finance</h4>
+                                                </div>
+                                        </a>
+                                </div>	
+  				<div class="col-xs-4 col-sm-2">
+  					<a href="/search/?limit=100&offset=0&category__identifier__in=geology%20and%20soils" data-toggle="tooltip" data-placement="auto"
+  						title="Geophysical features and processes, geology, minerals, sciences dealing with the composition, structure and origin of the earth s rocks, risks of earthquakes, volcanic activity, landslides, gravity information, soils, permafrost, hydrogeology, erosion." >
+  						<div class="category">
+  							<i class="fa fa-globe fa-4x"></i>
+  							<h4>Geology and Soils</h4>
+  						</div>
+  					</a>
+  				</div>
+				<div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=governance" data-toggle="tooltip" data-placement="auto"
+                                                title="" >
+                                                <div class="category">
+                                                        <i class="fa fa-institution fa-4x"></i>
+                                                        <h4>Governance</h4>
+                                                </div>
+                                        </a>
+                                </div>
+				<div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=hazards%2Fdisasters" data-toggle="tooltip" data-placement="auto"
+                                                title="" >
+                                                <div class="category">
+                                                        <i class="fa fa-ambulance fa-4x"></i>
+                                                        <h4>Hazards and Natural Disasters</h4>
+                                                </div>
+                                        </a>
+                                </div>
+  				<div class="col-xs-4 col-sm-2">
+  					<a href="/search/?limit=100&offset=0&category__identifier__in=health" data-toggle="tooltip" data-placement="auto"
+  						title="Health, health services, human ecology, and safety." >
+  						<div class="category">
+  							<i class="fa fa-medkit fa-4x"></i>
+  							<h4>Health</h4>
+  						</div>
+  					</a>
+  				</div>
+				<div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=hydrography" data-toggle="tooltip" data-placement="auto"
+                                                title="" >
+                                                <div class="category">
+                                                        <i class="fa fa-ship fa-4x"></i>
+                                                        <h4>Hydrography</h4>
+                                                </div>
+                                        </a>
+                                </div>
+				<div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=imagery" data-toggle="tooltip" data-placement="auto"
+                                                title="Satellite Imagery" >
+                                                <div class="category">
+                                                        <i class="fa fa-image fa-4x"></i>
+                                                        <h4>Imagery</h4>
+                                                </div>
+                                        </a>
+                                </div>
+				<div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=land%20ownership" data-toggle="tooltip" data-placement="auto"
+                                                title="" >
+                                                <div class="category">
+                                                        <i class="fa fa-drivers-license-o fa-4x"></i>
+                                                        <h4>Land Ownership</h4>
+                                                </div>
+                                        </a>
+                                </div>
+  				<div class="col-xs-4 col-sm-2">
+  					<a href="/search/?limit=100&offset=0&category__identifier__in=land%20use%2Fland%20cover" data-toggle="tooltip" data-placement="auto"
+  						title="Land cover, topographic maps, imagery, unclassified images, annotations." >
+  						<div class="category">
+  							<i class="fa fa-tree fa-4x"></i>
+  							<h4>Land User/Land Cover</h4>
+  						</div>
+  					</a>
+  				</div>
+  				<div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=language" data-toggle="tooltip" data-placement="auto"
+                                                title="" >
+                                                <div class="category">
+                                                        <i class="fa fa-language fa-4x"></i>
+                                                        <h4>Language</h4>
+                                                </div>
+                                        </a>
+                                </div>
+				<div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=recreation" data-toggle="tooltip" data-placement="auto"
+                                                title="" >
+                                                <div class="category">
+                                                        <i class="fa fa-gamepad fa-4x"></i>
+                                                        <h4>Recreation</h4>
+                                                </div>
+                                        </a>
+                                </div>
+				<div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=religion" data-toggle="tooltip" data-placement="auto"
+                                                title="" >
+                                                <div class="category">
+                                                        <i class="fa fa-book fa-4x"></i>
+                                                        <h4>Religion</h4>
+                                                </div>
+                                        </a>
+                                </div>
+				<div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=safety" data-toggle="tooltip" data-placement="auto"
+                                                title="" >
+                                                <div class="category">
+                                                        <i class="fa fa-life-ring fa-4x"></i>
+                                                        <h4>Safety</h4>
+                                                </div>
+                                        </a>
+                                </div>
+				<div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=shelter" data-toggle="tooltip" data-placement="auto"
+                                                title="" >
+                                                <div class="category">
+                                                        <i class="fa fa-home fa-4x"></i>
+                                                        <h4>Shelter</h4>
+                                                </div>
+                                        </a>
+                                </div>
+				<div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=solid%20waste" data-toggle="tooltip" data-placement="auto"
+                                                title="" >
+                                                <div class="category">
+                                                        <i class="fa fa-trash fa-4x"></i>
+                                                        <h4>Solid Waste</h4>
+                                                </div>
+                                        </a>
+                                </div>
+				<div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=telecommunications%20and%20innovation" data-toggle="tooltip" data-placement="auto"
+                                                title="" >
+                                                <div class="category">
+                                                        <i class="fa fa-wifi fa-4x"></i>
+                                                        <h4>Telecommunications</h4>
+                                                </div>
+                                        </a>
+                                </div>
+				<div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=topography" data-toggle="tooltip" data-placement="auto"
+                                                title="" >
+                                                <div class="category">
+                                                        <i class="fa fa-level-up fa-4x"></i>
+                                                        <h4>Topography</h4>
+                                                </div>
+                                        </a>
+                                </div>
+  				<div class="col-xs-4 col-sm-2">
+  					<a href="/search/?limit=100&offset=0&category__identifier__in=transportation" data-toggle="tooltip" data-placement="auto"
+  						title="Roads, airports/airstrips, shipping routes, tunnels, nautical charts, vehicle or vessel location, aeronautical charts, railways." >
+  						<div class="category">
+  							<i class="fa fa-road fa-4x"></i>
+  							<h4>Transportation</h4>
+  						</div>
+  					</a>
+  				</div>
+				<div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=urban%20planning" data-toggle="tooltip" data-placement="auto"
+                                                title="" >
+                                                <div class="category">
+                                                        <i class="fa fa-building-o fa-4x"></i>
+                                                        <h4>Urban Planning</h4>
+                                                </div>
+                                        </a>
+                                </div>
+				<div class="col-xs-4 col-sm-2">
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=wastewater" data-toggle="tooltip" data-placement="auto"
+                                                title="" >
+                                                <div class="category">
+                                                        <i class="fa fa-bath fa-4x"></i>
+                                                        <h4>Wastewater</h4>
+                                                </div>
+                                        </a>
+                                </div>
+  				<div class="col-xs-4 col-sm-2">
+  					<a href="/search/?limit=100&offset=0&category__identifier__in=water%20and%20sanitation" data-toggle="tooltip" data-placement="auto"
+  						title="Rivers and glaciers, salt lakes, water utilization plans, dams, currents, floods, water quality, hydrographic charts, tides, tidal waves, coastal information, reefs." >
+  						<div class="category">
+  							<i class="fa fa-tint fa-4x"></i>
+  							<h4>Water and Sanitation</h4>
+  						</div>
+  					</a>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+  </section-->
+
+  <!--section id="showcase">
+    <div class="container">
+      <div class="row">
+        <h2>Featured Datasets</h2>
+        {% verbatim %}
+        <div ng-app="featured">
+          <div ng-repeat="item in featured | limitTo:4">
+            <div class="col-md-3">
+              <a href="{{ item.detail_url }}"><img ng-src="{{ item.thumbnail_url }}" /></a>
+              <h4>{{ item.title }}</h4>
+            </div>
+          </div>
+        </div>
+  		{% endverbatim %}
+      </div>
+      <p><a href="/search/">Explore all datasets</a></p>
+    </div>
+  </section-->
+
+
+  {% endblock %}
+
+{% endblock %}
+
+{% block extra_script %}
+{% if DEBUG_STATIC %}
+<script src="{{ STATIC_URL }}lib/js/angular.js"></script>
+{% endif %}
+<script type="text/javascript">
+    FEATURED_URL = '{% url 'api_dispatch_list' api_name='api' resource_name='featured' %}'
+    'use strict';
+    (function(){
+      var module = angular.module('featured', []);
+      module.run(function($http, $rootScope){
+        $http.get(FEATURED_URL).success(function(data){
+          $rootScope.featured = data.objects;
+        });
+      });
+    })();
+</script>
+<script>
+	$('[data-toggle="tooltip"]').tooltip();
+</script>
+{% endblock extra_script %}
+
