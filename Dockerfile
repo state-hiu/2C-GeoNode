@@ -28,26 +28,22 @@ RUN pip install pipenv
 COPY requirements.txt /usr/
 RUN pip install -r requirements.txt
 
-RUN cd src && git clone https://github.com/GeoNode/geonode.git 
-RUN cd src/geonode && git reset --hard fc57782f28ad05f018264808257dd677360b64f7
+# Install pygdal (after requirements for numpy 1.16)
+RUN pip install pygdal==$(gdal-config --version).*
 
-RUN pip install -e /usr/src/geonode
+# Install GeoNode 2.10x branch as of July 18
+RUN pip install --no-deps https://github.com/GeoNode/geonode/archive/fc57782f28ad05f018264808257dd677360b64f7.zip
 
+# Copy patches for GeoNode and other dependencies.
+COPY patches /usr/src/sc/patches
+
+# Patch GeoNode and other deps if needed from the patches folder
+RUN cd /usr/local/lib/python2.7/site-packages; \
+    for i in /usr/src/sc/patches/*.patch; do patch -p1 < $i; done
 
 # This should be close to the last step in order to avoid rebuilding image during development.
 COPY . /usr/src/sc
 WORKDIR /usr/src/sc
-
-RUN pip install -e /usr/src/sc 
-# Patch if needed from the patches folder
-#RUN cd /usr/local/lib/python2.7/site-packages; \
-#    for i in /usr/src/sc/patches/*.patch; do patch -p1 < $i; done
-
-# Patch geonode if needed
-#RUN cd /usr/src/geonode; \
-#    for i in /usr/src/sc/patches/geonode/*.patch; do patch -p1 < $i; done
-
-# Install pygdal (after requirements for numpy 1.16)
-RUN pip install pygdal==$(gdal-config --version).*
+RUN python setup.py develop --no-deps
 
 ENTRYPOINT ["/usr/src/sc/entrypoint.sh"]
