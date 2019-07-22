@@ -6,8 +6,8 @@ from geonode.maps.models import Map
 from geonode.layers.models import Layer, Style
 from geonode.utils import designals, resignals
 
-source_str="147.102.109.19"
-target_str="2c.puerti.co"
+target_str="147.102.109.19"
+source_str="2c.puerti.co"
 
 print "Deactivating GeoNode Signals..."
 designals()
@@ -32,14 +32,17 @@ for map in maps:
     print "Updated Map[%s]" % (map)
 
 layers = Layer.objects.all()
-
 for layer in layers:
     print "Checking Layer[%s]" % (layer)
     if layer.thumbnail_url:
         original = layer.thumbnail_url
-        layer.thumbnail_url = layer.thumbnail_url.replace(source_str, target_str)
-        layer.save()
-        print "Updated Thumbnail URL from [%s] to [%s]" % (original, layer.thumbnail_url)
+        new_url = layer.thumbnail_url.replace(source_str, target_str).replace("https", "http")
+        # This save is triggering signals, because the signal trigger is happenning 
+        # on another thread ( kombu? ).
+        #layer.save()
+        # Using alternate route below:
+        Layer.objects.filter(id=layer.id).update(thumbnail_url=new_url)
+        print "Updated Thumbnail URL from [%s] to [%s]" % (original, new_url)
 
 styles = Style.objects.all()
 
@@ -47,17 +50,20 @@ for style in styles:
     print "Checking Style[%s]" % (style)
     if style.sld_url:
         original = style.sld_url
-        style.sld_url = style.sld_url.replace(source_str, target_str)
+        style.sld_url = style.sld_url.replace(source_str, target_str).replace("https", "http")
+
         style.save()
         print "Updated SLD URL from [%s] to [%s]" % (original, style.sld_url)
-
 links = Link.objects.all()
 
 for link in links:
     print "Checking Link[%s]" % (link)
-    if link.url:
+    if 'Original Dataset' in link.name:
+        link.delete()
+    elif link.url:
         original = link.url
-        link.url = link.url.replace(source_str, target_str)
+        link.url = link.url.replace(source_str, target_str).replace("https", "http")
+
         link.save()
         print "Updated URL from [%s] to [%s]" % (original, link.url)
 
@@ -67,7 +73,8 @@ for res in resources:
     print "Checking Resource[%s]" % (res)
     if res.metadata_xml:
         original = res.metadata_xml
-        res.metadata_xml = res.metadata_xml.replace(source_str, target_str)
+        res.metadata_xml = res.metadata_xml.replace(source_str, target_str).replace("https", "http")
+
         res.save()
         print "Updated metadata XML"
 
