@@ -1,8 +1,8 @@
 {
-  "name": "sc",
+  "name": "secondarycities",
   "version": "0.0.1",
   "author": "GeoNode Developers",
-  "description": "Static code and assets for sc",
+  "description": "Static code and assets for secondarycities",
   "contributors": [
     {
     }
