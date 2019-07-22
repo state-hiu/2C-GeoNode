@@ -6,82 +6,12 @@ This is where you can override the hero area block. You can simply modify the co
 {% block hero %}
 <div class="jumbotron">
   <div class="container">
-      <h1>{{custom_theme.jumbotron_welcome_title|default:_("Secondary Cities GeoNode")}}</h1>
+      <h1>{{custom_theme.jumbotron_welcome_title|default:_("Welcome")}}</h1>
       <p></p>
-      <p>{{custom_theme.jumbotron_welcome_content|default:_("Building partnerships to create geospatial data on secondary cities (2C).")}}</p>
+      <p>{{custom_theme.jumbotron_welcome_content|default:_("GeoNode is an open source platform for sharing geospatial data and maps.")}}</p>
       {% if not custom_theme.jumbotron_cta_hide %}
-      <p><a class="btn btn-default btn-lg" target="_blank" href="{{custom_theme.jumbotron_cta_link|default:_("http://docs.geonode.org/en/master/tutorials/users/index.html")}}" role="button">{{custom_theme.jumbotron_cta_text|default:_("GeoNode Getting Started &raquo;")}}</a></p>
+      <p><a class="btn btn-default btn-lg" target="_blank" href="{{custom_theme.jumbotron_cta_link|default:_("http://docs.geonode.org/en/master/usage/")}}" role="button">{{custom_theme.jumbotron_cta_text|default:_("Get Started &raquo;")}}</a></p>
       {% endif %}
-
-
   </div>
 </div>
-
-  <div class="cities">
-  	<div class="container">
-                    <div class="row">
-                              <div class="container">
-                      		<h1>{% trans "Cities" %}</h1>
-                      		<div class="cities-links">
-                                                  <a href="/search/?q=Cusco" class="btn btn-default" role="button">
-                                                  <img class="thumbnail" src="/static/img/Cusco3.jpg">
-                                                  <h4>Cusco, Peru</h4>
-                                                  <!--<h5 class="text-center">No datasets</h5>-->
-                                                  </a>
-                                                  <a href="/search/?q=Denpasar" class="btn btn-default" role="button">
-                                                  <img class="thumbnail" src="/static/img/denpasar3.jpg">
-                                                  <h4>Denpasar, Indonesia</h4>
-                                                  <!--<h5 class="text-center">No datasets</h5>-->
-                                                  </a>
-					          </br>
-
-                                                  <a href="/search/?q=Douala" class="btn btn-default" role="button">
-                                                  <img class="thumbnail" src="/static/img/douala_web4.jpg">
-                                                  <h4>Douala, Cameroon</h4>
-                                                  <!--<h5 class="text-center">No datasets</h5>-->
-                                                  </a>
-                                                  <a href="/search/?q=Esmeraldas" class="btn btn-default" role="button">
-                                                  <img class="thumbnail" src="/static/img/esmeraldas_web.jpg">
-                                                  <h4>Esmeraldas, Ecuador</h4>
-                                                  <!--<h5 class="text-center">No datasets</h5>-->
-                                                  </a>
-						  <a href="/search/?q=Kharkiv" class="btn btn-default" role="button">
-                                                  <img class="thumbnail" src="/static/img/Kharkiv4.jpg">
-                                                  <h4>Kharkiv, Ukraine</h4>
-                                                  <!--<h5 class="text-center">No datasets</h5>-->
-						  </a>
-
-						  </br>
-
-						  <a href="/search/?q=Medellin" class="btn btn-default" role="button">
-                                                  <img class="thumbnail" src="/static/img/medellin4.jpg">
-                                                  <h4>Medellín, Colombia</h4>
-                                                  <!--<h5 class="text-center">No datasets</h5>-->
-                                                  <a href="/search/?q=Mekelle" class="btn btn-default" role="button">
-                                                  <img class="thumbnail" src="/static/img/mekelle3.jpg">
-                                                  <h4>Mekelle, Ethiopia</h4>
-                                                  <!--<h5 class="text-center">No datasets</h5>-->
-                                                  </a>
-						  </br>
-                                                  <a href="/search/?q=Pokhara" class="btn btn-default" role="button">
-                                                  <img class="thumbnail" src="/static/img/pokhara3.jpg">
-                                                  <h4>Pokhara, Nepal</h4>
-                                                  <!--<h5 class="text-center">No datasets</h5>-->
-                                                  </a>
-						  <a href="/search/?q=Port%20Harcourt" class="btn btn-default" role="button">
-                                                  <img class="thumbnail" src="/static/img/portharcourt_web.jpg">
-                                                  <h4>Port Harcourt, Nigeria</h4>
-                                                  <!--<h5 class="text-center">No datasets</h5>-->
-                                                  </a>
-						  <a href="/search/?q=santiago" class="btn btn-default" role="button">
-                                                  <img class="thumbnail" src="/static/img/santiago_web.jpg">
-                                                  <h4>Santiago, Dominican Republic</h4>
-                                                  <!--<h5 class="text-center">No datasets</h5>-->
-                                                  </a>
-                      		</div>
-                              </div>
-                    </div>
-  	</div>
-  </div>
-
 {% endblock hero %}
