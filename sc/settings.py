@@ -363,8 +363,8 @@ INSTALLED_APPS = (
     'guardian',
     'oauth2_provider',
     'corsheaders',
-    'monkeypatch',
-    'layer_override',
+#    'monkeypatch',
+#    'layer_override',
 
     'invitations',
 
@@ -2278,3 +2278,5 @@ if 'geonode.geoserver' in INSTALLED_APPS:
 
 FAVORITE_ENABLED = False
 CREATE_LAYER = False
+UPDATE_RESOURCE_LINKS_AT_MIGRATE = False
+DISPLAY_ORIGINAL_DATASET_LINK=False
