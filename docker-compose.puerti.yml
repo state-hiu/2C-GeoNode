@@ -3,48 +3,45 @@ services:
   django:
     volumes:
       - '.:/usr/src/sc'
-      - '/home/ubuntu/backup:/backup'
+      - '/home/user/test_data:/data'
     environment:
       DEBUG: 'True'
       GEONODE_LB_HOST_IP: 2c.puerti.co
-      GEONODE_LB_PORT: 80
-      GEONODE_DATABASE: state_2c_geonode_app
+      GEONODE_LB_PORT: 443
       SITEURL: https://2c.puerti.co/
-      ALLOWED_HOSTS: "['2c.puerti.co', 'localhost']"
+      ALLOWED_HOSTS: "['2c.puerti.co']"
       GEOSERVER_PUBLIC_LOCATION: https://2c.puerti.co/geoserver/
       GEOSERVER_WEB_UI_LOCATION: https://2c.puerti.co/geoserver/
       HAYSTACK_SEARCH: 'True'
       SKIP_PERMS_FILTER: 'True'
 
-  elasticsearch:
-    command: ["elasticsearch", "-Des.logger.level=DEBUG"]
   celery:
     environment:
-      DEBUG: 'False'
       GEONODE_LB_HOST_IP: 2c.puerti.co
-      GEONODE_LB_PORT: 80
+      GEONODE_LB_PORT: 443
       SITEURL: https://2c.puerti.co/
-      ALLOWED_HOSTS: "['2c.puerti.co', ]"
-      GEOSERVER_PUBLIC_LOCATION: https://2c.puerti.co/gs/
+      ALLOWED_HOSTS: "['2c.puerti.co']"
+      GEOSERVER_PUBLIC_LOCATION: https://2c.puerti.co/geoserver/
       GEOSERVER_WEB_UI_LOCATION: https://2c.puerti.co/geoserver/
-      HAYSTACK_SEARCH: 'True'
+      DEBUG: 'False'
 
   geoserver:
     environment:
       GEONODE_LB_HOST_IP: 2c.puerti.co
-      GEONODE_LB_PORT: 80
+      GEONODE_LB_PORT: 443
       NGINX_BASE_URL: https://2c.puerti.co/
-    volumes:
-      - '/home/ubuntu/backup:/backup'
 
+  geonode:
+    environment:
+      SERVER_NAME: 2c.puerti.co
 
 volumes:
   geoserver-data-dir:
     external:
        name: ${COMPOSE_PROJECT_NAME}-gsdatadir
-       #  dbdata:
-       #    external:
-       #    name: ${COMPOSE_PROJECT_NAME}-dbdata
+  dbdata:
+    external:
+       name: ${COMPOSE_PROJECT_NAME}-dbdata
        #  dbbackups:
        #    external:
        #     driver: ${BACKUPS_VOLUME_DRIVER}

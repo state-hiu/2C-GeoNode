@@ -6,8 +6,9 @@ from geonode.maps.models import Map
 from geonode.layers.models import Layer, Style
 from geonode.utils import designals, resignals
 
-target_str="147.102.109.19"
-source_str="2c.puerti.co"
+#source_str="147.102.109.19"
+source_str="localhost:8080"
+target_str="3c.puerti.co"
 
 print "Deactivating GeoNode Signals..."
 designals()
@@ -36,7 +37,7 @@ for layer in layers:
     print "Checking Layer[%s]" % (layer)
     if layer.thumbnail_url:
         original = layer.thumbnail_url
-        new_url = layer.thumbnail_url.replace(source_str, target_str).replace("https", "http")
+        new_url = layer.thumbnail_url.replace(source_str, target_str).replace("http://", "https://")
         # This save is triggering signals, because the signal trigger is happenning 
         # on another thread ( kombu? ).
         #layer.save()
@@ -50,7 +51,7 @@ for style in styles:
     print "Checking Style[%s]" % (style)
     if style.sld_url:
         original = style.sld_url
-        style.sld_url = style.sld_url.replace(source_str, target_str).replace("https", "http")
+        style.sld_url = style.sld_url.replace(source_str, target_str).replace("http://", "https://")
 
         style.save()
         print "Updated SLD URL from [%s] to [%s]" % (original, style.sld_url)
@@ -62,7 +63,7 @@ for link in links:
         link.delete()
     elif link.url:
         original = link.url
-        link.url = link.url.replace(source_str, target_str).replace("https", "http")
+        link.url = link.url.replace(source_str, target_str).replace("http://", "https://")
 
         link.save()
         print "Updated URL from [%s] to [%s]" % (original, link.url)
@@ -73,7 +74,7 @@ for res in resources:
     print "Checking Resource[%s]" % (res)
     if res.metadata_xml:
         original = res.metadata_xml
-        res.metadata_xml = res.metadata_xml.replace(source_str, target_str).replace("https", "http")
+        res.metadata_xml = res.metadata_xml.replace(source_str, target_str).replace("http://", "https://")
 
         res.save()
         print "Updated metadata XML"

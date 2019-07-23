@@ -181,7 +181,7 @@ services:
        DOCKER_API_VERSION: "1.24"
 
   geonode:
-    image: geonode/nginx:geoserver
+    image: valian/docker-nginx-auto-ssl
     restart: unless-stopped
     container_name: nginx4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -195,9 +195,10 @@ services:
       - geoserver
     ports:
       - 80:80
+      - 443:443
     volumes:
       - statics:/mnt/volumes/statics
-
+      - ./nginx:/etc/nginx/conf.d
 
   data-dir-conf:
     image: geonode/geoserver_data:2.14.x
