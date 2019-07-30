@@ -1,0 +1,23 @@
+diff --git a/geonode/templates/base.html b/geonode/templates/base.html
+index a911b4d..ba904a3 100644
+--- a/geonode/templates/base.html
++++ b/geonode/templates/base.html
+@@ -288,18 +288,6 @@
+ 
+            {% endblock my_extra_right_tab %}
+ 
+-            <li>
+-              <div class="search">
+-                <form id="search" action="{% url "search" %}" >
+-                  <span class="fa fa-search"></span>
+-                  {% if HAYSTACK_SEARCH %}
+-                  <input id="search_input" type="text" placeholder="{% trans 'Search' %}" name="q">
+-                  {% else %}
+-                  <input id="search_input" type="text" placeholder="{% trans 'Search' %}" name="title__icontains">
+-                  {% endif %}
+-                </form>
+-              </div>
+-            </li>
+             {% if not user.is_authenticated and ACCOUNT_OPEN_SIGNUP %}
+             <li><a href="{% url "account_signup" %}">{% trans "Register" %}</a></li>
+             {% endif %}

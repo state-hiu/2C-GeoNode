@@ -1065,11 +1065,11 @@ PROXY_URL = '/proxy/?url=' if DEBUG else None
 # - pip install pyelasticsearch
 # Set HAYSTACK_SEARCH to True
 # Run "python manage.py rebuild_index"
-HAYSTACK_SEARCH = strtobool(os.getenv('HAYSTACK_SEARCH', 'False'))
+HAYSTACK_SEARCH = True
 # Avoid permissions prefiltering
-SKIP_PERMS_FILTER = strtobool(os.getenv('SKIP_PERMS_FILTER', 'False'))
+SKIP_PERMS_FILTER = True
 # Update facet counts from Haystack
-HAYSTACK_FACET_COUNTS = strtobool(os.getenv('HAYSTACK_FACET_COUNTS', 'True'))
+HAYSTACK_FACET_COUNTS = True 
 if HAYSTACK_SEARCH:
     if 'haystack' not in INSTALLED_APPS:
         INSTALLED_APPS += ('haystack', )
