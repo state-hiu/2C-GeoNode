@@ -1,0 +1,79 @@
+diff --git a/geonode/static/geonode/js/search/search.js b/geonode/static/geonode/js/search/search.js
+index b436638..a792126 100644
+--- a/geonode/static/geonode/js/search/search.js
++++ b/geonode/static/geonode/js/search/search.js
+@@ -29,8 +29,8 @@
+   // Load categories, keywords, and regions
+   module.load_categories = function ($http, $rootScope, $location){
+         var params = typeof FILTER_TYPE == 'undefined' ? {} : {'type': FILTER_TYPE};
+-        if ($location.search().hasOwnProperty('title__icontains')){
+-          params['title__icontains'] = $location.search()['title__icontains'];
++        if ($location.search().hasOwnProperty('q')){
++          params['q'] = $location.search()['q'];
+         }
+         $http.get(CATEGORIES_ENDPOINT, {params: params}).success(function(data){
+             if($location.search().hasOwnProperty('category__identifier__in')){
+@@ -57,8 +57,8 @@
+ 
+   module.load_keywords = function ($http, $rootScope, $location){
+         var params = typeof FILTER_TYPE == 'undefined' ? {} : {'type': FILTER_TYPE};
+-        if ($location.search().hasOwnProperty('title__icontains')){
+-          params['title__icontains'] = $location.search()['title__icontains'];
++        if ($location.search().hasOwnProperty('q')){
++          params['q'] = $location.search()['q'];
+         }
+         $http.get(KEYWORDS_ENDPOINT, {params: params}).success(function(data){
+             if($location.search().hasOwnProperty('keywords__slug__in')){
+@@ -101,8 +101,8 @@
+ 
+   module.load_t_keywords = function ($http, $rootScope, $location){
+         var params = typeof FILTER_TYPE == 'undefined' ? {} : {'type': FILTER_TYPE};
+-        if ($location.search().hasOwnProperty('title__icontains')){
+-          params['title__icontains'] = $location.search()['title__icontains'];
++        if ($location.search().hasOwnProperty('q')){
++          params['q'] = $location.search()['q'];
+         }
+         $http.get(T_KEYWORDS_ENDPOINT, {params: params}).success(function(data){
+             if($location.search().hasOwnProperty('tkeywords__id__in')){
+@@ -118,8 +118,8 @@
+ 
+   module.load_regions = function ($http, $rootScope, $location){
+         var params = typeof FILTER_TYPE == 'undefined' ? {} : {'type': FILTER_TYPE};
+-        if ($location.search().hasOwnProperty('title__icontains')){
+-          params['title__icontains'] = $location.search()['title__icontains'];
++        if ($location.search().hasOwnProperty('q')){
++          params['q'] = $location.search()['q'];
+         }
+         $http.get(REGIONS_ENDPOINT, {params: params}).success(function(data){
+             if($location.search().hasOwnProperty('regions__name__in')){
+@@ -143,8 +143,8 @@
+     }
+     module.load_owners = function ($http, $rootScope, $location){
+         var params = typeof FILTER_TYPE == 'undefined' ? {} : {'type': FILTER_TYPE};
+-        if ($location.search().hasOwnProperty('title__icontains')){
+-            params['title__icontains'] = $location.search()['title__icontains'];
++        if ($location.search().hasOwnProperty('q')){
++            params['q'] = $location.search()['q'];
+         }
+         $http.get(OWNERS_ENDPOINT, {params: params}).success(function(data){
+             if($location.search().hasOwnProperty('owner__username__in')){
+@@ -305,8 +305,8 @@
+             $scope.text_query = $location.search()['q'].replace(/\+/g," ");
+           }
+         } else {
+-          if ($location.search().hasOwnProperty('title__icontains')){
+-            $scope.text_query = $location.search()['title__icontains'].replace(/\+/g," ");
++          if ($location.search().hasOwnProperty('q')){
++            $scope.text_query = $location.search()['q'].replace(/\+/g," ");
+           }
+         }
+ 
+@@ -551,7 +551,7 @@
+                 var query_key = 'username__icontains';
+             else
+                 console.log('search key', $('#text_search_input').data());
+-                var query_key = $('#text_search_input').data('query-key')||'title__icontains';
++                var query_key = $('#text_search_input').data('query-key')||'q';
+             $scope.query[query_key] = $('#text_search_input').val();
+         query_api($scope.query);
+     });
