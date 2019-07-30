@@ -1,0 +1,18 @@
+diff --git a/geonode/layers/models.py b/geonode/layers/models.py
+index f1400bc84..c0ccc95c4 100644
+--- a/geonode/layers/models.py
++++ b/geonode/layers/models.py
+@@ -131,6 +131,13 @@ class Layer(ResourceBase):
+     name = models.CharField(_('Name'), max_length=128)
+     typename = models.CharField(_('Typename'), max_length=128, null=True, blank=True)
+ 
++    lineage = models.TextField(blank=True,null=True)
++    city = models.CharField(max_length=128,blank=True,null=True)
++    dataprovider_name = models.CharField(max_length=255,blank=True,null=True)
++    dataprovider_url = models.CharField(max_length=255, null=True, blank=True)
++    dataprovider_contact = models.CharField(max_length=255,blank=True,null=True)
++    dataprovidertype = models.CharField(max_length=128,null=True)
++
+     is_mosaic = models.BooleanField(_('Is mosaic?'), default=False)
+     has_time = models.BooleanField(_('Has time?'), default=False)
+     has_elevation = models.BooleanField(_('Has elevation?'), default=False)
