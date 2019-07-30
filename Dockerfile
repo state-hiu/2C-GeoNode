@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
                 libmemcached-dev libsasl2-dev zlib1g-dev \
                 python-pylibmc \
                 uwsgi uwsgi-plugin-python \
-                vim htop git \
+                vim htop git ripgrep \
 	--no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 
