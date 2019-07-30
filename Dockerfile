@@ -34,6 +34,14 @@ RUN pip install pygdal==$(gdal-config --version).*
 # Install GeoNode 2.10x branch as of July 18
 RUN pip install --no-deps https://github.com/GeoNode/geonode/archive/fc57782f28ad05f018264808257dd677360b64f7.zip
 
+# Set up the machine to be able to patch deps in site-packages
+WORKDIR /usr/local/lib/python2.7/site-packages
+RUN git init \
+ && git add * \
+ && git config --global user.email "<>" \
+ && git config --global user.name "sc" \
+ && git commit -m "Initial state"
+
 # Copy patches for GeoNode and other dependencies.
 COPY patches /usr/src/sc/patches
 
