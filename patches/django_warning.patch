@@ -1,0 +1,15 @@
+diff --git a/django/db/models/fields/__init__.py b/django/db/models/fields/__init__.py
+index 8d40c77..5b95547 100644
+--- a/django/db/models/fields/__init__.py
++++ b/django/db/models/fields/__init__.py
+@@ -1445,10 +1445,6 @@ class DateTimeField(DateField):
+                 name = '%s.%s' % (self.model.__name__, self.name)
+             except AttributeError:
+                 name = '(unbound)'
+-            warnings.warn("DateTimeField %s received a naive datetime (%s)"
+-                          " while time zone support is active." %
+-                          (name, value),
+-                          RuntimeWarning)
+             default_timezone = timezone.get_default_timezone()
+             value = timezone.make_aware(value, default_timezone)
+         return value

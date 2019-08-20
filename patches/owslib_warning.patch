@@ -1,0 +1,31 @@
+diff --git a/owslib/iso.py b/owslib/iso.py
+index 1a56340..1dff36d 100644
+--- a/owslib/iso.py
++++ b/owslib/iso.py
+@@ -109,12 +109,6 @@ class MD_Metadata(object):
+                 self.referencesystem = None
+ 
+             # TODO: merge .identificationinfo into .identification
+-            warnings.warn(
+-                'the .identification and .serviceidentification properties will merge into '
+-                '.identification being a list of properties.  This is currently implemented '
+-                'in .identificationinfo.  '
+-                'Please see https://github.com/geopython/OWSLib/issues/38 for more information',
+-                FutureWarning)
+ 
+             val = md.find(util.nspath_eval('gmd:identificationInfo/gmd:MD_DataIdentification', namespaces))
+             val2 = md.find(util.nspath_eval('gmd:identificationInfo/srv:SV_ServiceIdentification', namespaces))
+@@ -487,13 +481,6 @@ class MD_DataIdentification(object):
+                 if val:
+                     self.spatialrepresentationtype.append(val)
+ 
+-            warnings.warn(
+-                'The .keywords and .keywords2 properties will merge into the '
+-                '.keywords property in the future, with .keywords becoming a list '
+-                'of MD_Keywords instances. This is currently implemented in .keywords2. '
+-                'Please see https://github.com/geopython/OWSLib/issues/301 for more information',
+-                FutureWarning)
+-
+             self.keywords = []
+ 
+             for i in md.findall(util.nspath_eval('gmd:descriptiveKeywords', namespaces)):

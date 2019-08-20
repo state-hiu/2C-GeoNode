@@ -1,0 +1,13 @@
+diff --git a/geoserver/style.py b/geoserver/style.py
+index 9c7311d..a601657 100755
+--- a/geoserver/style.py
++++ b/geoserver/style.py
+@@ -81,7 +81,7 @@ class Style(ResourceInfo):
+             user_style = self._get_sld_dom().find("{http://www.opengis.net/sld}UserLayer/{http://www.opengis.net/sld}UserStyle")
+ 
+         title_node = None
+-        if user_style:
++        if user_style is not None:
+             try:
+                 # it is not mandatory
+                 title_node = user_style.find("{http://www.opengis.net/sld}Title")

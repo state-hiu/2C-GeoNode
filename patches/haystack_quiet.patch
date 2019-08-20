@@ -1,0 +1,15 @@
+diff --git a/haystack/management/commands/update_index.py b/haystack/management/commands/update_index.py
+index a370f59..e349fb3 100644
+--- a/haystack/management/commands/update_index.py
++++ b/haystack/management/commands/update_index.py
+@@ -255,10 +255,6 @@ class Command(BaseCommand):
+ 
+             total = qs.count()
+ 
+-            if self.verbosity >= 1:
+-                self.stdout.write(u"Indexing %d %s" % (
+-                    total, force_text(model._meta.verbose_name_plural))
+-                )
+ 
+             batch_size = self.batchsize or backend.batch_size
+ 
