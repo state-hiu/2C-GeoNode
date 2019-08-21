@@ -5,8 +5,8 @@ from django.core.management.base import BaseCommand
 from guardian.shortcuts import get_objects_for_user
 from geonode.people.models import Profile
 from geonode.layers.models import Layer
-from geonode.security.models import set_geofence_all, set_geofence_owner
-from geonode.security.models import get_users_with_perms
+from geonode.security.utils import set_geofence_all
+from geonode.security.utils import get_users_with_perms
 
 profiles = Profile.objects.filter(is_superuser=False)
 authorized = list(get_objects_for_user(profiles[0], 'base.view_resourcebase').values('id'))
