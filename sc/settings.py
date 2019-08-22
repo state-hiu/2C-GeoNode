@@ -2056,6 +2056,10 @@ LOGGING = {
             "handlers": ["console"], "level": "ERROR", },
         "geonode": {
             "handlers": ["console"], "level": "INFO", },
+        "gsimporter": {
+            "handlers": ["console"], "level": "INFO", },
+        "gsuploader": {
+            "handlers": ["console"], "level": "INFO", },
         "geonode.qgis_server": {
             "handlers": ["console"], "level": "ERROR", },
         "gsconfig.catalog": {

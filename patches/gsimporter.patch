@@ -1,0 +1,47 @@
+diff --git a/gsimporter/api.py b/gsimporter/api.py
+index 43a457c..21e3039 100644
+--- a/gsimporter/api.py
++++ b/gsimporter/api.py
+@@ -217,7 +217,13 @@ class Target(_UploadBase):
+         if workspace:
+             dataStore['workspace'] = { 'name' : str(workspace) }
+         target_rep = { self.store_type : dataStore }
+-        self._client().put_json(self._url(None), json.dumps(target_rep))
++        ## FIXME Secondary Cities Patch due to https being used instead of http for local GeoServer connections
++        url = self._url(None)
++        _logger.error("previous url: %s" % url)
++        url = url.replace("https", "http")
++        _logger.error("replaced url: %s" % url)
++        ## ENDFIXME
++        self._client().put_json(url, json.dumps(target_rep))
+ 
+ 
+ class BBox(_UploadBase):
+diff --git a/gsimporter/api.pyc b/gsimporter/api.pyc
+index 41d8c74..f71f6dd 100644
+Binary files a/gsimporter/api.pyc and b/gsimporter/api.pyc differ
+diff --git a/gsimporter/client.py b/gsimporter/client.py
+index e1c4be6..60041fd 100644
+--- a/gsimporter/client.py
++++ b/gsimporter/client.py
+@@ -153,6 +153,7 @@ class _Client(object):
+         return self._request(url, "DELETE")
+ 
+     def put_json(self, url, data):
++        _logger.error("url: %s" % url)
+         return self._request(url, "PUT", data, {
+             "Content-type" : "application/json"
+         })
+@@ -174,6 +175,9 @@ class _Client(object):
+             log_data = data if data_len < 1024 else "[Data to long...]"
+         _logger.info("%s request to %s:\n[Data]:%s", method, url, log_data)
+         headers.update(self.headers)
++        # FIXME Secondary Cities
++        url = url.replace("https", "http")
++        # ENDFIXME
+         resp = self.http.request(method, url, body=data, headers=headers, preload_content=False)
+         content = resp.read()
+         _debug(resp, content)
+diff --git a/gsimporter/client.pyc b/gsimporter/client.pyc
+index 1c20c2f..983a98b 100644
+Binary files a/gsimporter/client.pyc and b/gsimporter/client.pyc differ
