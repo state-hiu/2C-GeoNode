@@ -1,0 +1,67 @@
+diff --git a/geonode/api/resourcebase_api.py b/geonode/api/resourcebase_api.py
+index aebda33..34e9c35 100644
+--- a/geonode/api/resourcebase_api.py
++++ b/geonode/api/resourcebase_api.py
+@@ -89,6 +89,8 @@ class CommonMetaApi:
+                  'category': ALL_WITH_RELATIONS,
+                  'group': ALL_WITH_RELATIONS,
+                  'owner': ALL_WITH_RELATIONS,
++                 'city': ALL,
++                 'dataprovidertype': ALL,
+                  'date': ALL,
+                  }
+     ordering = ['date', 'title', 'popular_count']
+@@ -116,6 +118,8 @@ class CommonModelApi(ModelResource):
+         'id',
+         'uuid',
+         'title',
++        'city',
++        'dataprovidertype',
+         'date',
+         'date_type',
+         'edition',
+@@ -306,6 +310,9 @@ class CommonModelApi(ModelResource):
+ 
+         # Topic category filter
+         category = parameters.getlist("category__identifier__in")
++        
++        city = parameters.getlist("city__in")
++        dataprovidertype = parameters.getlist("dataprovidertype__in")
+ 
+         # Keyword filter
+         keywords = parameters.getlist("keywords__slug__in")
+@@ -317,7 +324,7 @@ class CommonModelApi(ModelResource):
+         owner = parameters.getlist("owner__username__in")
+ 
+         # Sort order
+-        sort = parameters.get("order_by", "relevance")
++        sort = parameters.get("order_by", "-_score")
+ 
+         # Geospatial Elements
+         bbox = parameters.get("extent", None)
+@@ -392,6 +399,16 @@ class CommonModelApi(ModelResource):
+             sqs = (SearchQuerySet() if sqs is None else sqs).narrow(
+                 'category:%s' % ','.join(map(str, category)))
+ 
++        # filter by city
++        if city:
++            sqs = (SearchQuerySet() if sqs is None else sqs).narrow(
++                'city:%s' % ','.join(map(str, city)))
++
++        # filter by dataprovidertype
++        if dataprovidertype:
++            sqs = (SearchQuerySet() if sqs is None else sqs).narrow(
++                'dataprovidertype:%s' % ','.join(map(str, dataprovidertype)))
++
+         # filter by keyword: use filter_or with keywords_exact
+         # not using exact leads to fuzzy matching and too many results
+         # using narrow with exact leads to zero results if multiple keywords
+@@ -458,7 +475,7 @@ class CommonModelApi(ModelResource):
+                 "-popular_count")
+         else:
+             sqs = (
+-                SearchQuerySet() if sqs is None else sqs).order_by("-date")
++                SearchQuerySet() if sqs is None else sqs).order_by("-_score")
+ 
+         return sqs
+ 

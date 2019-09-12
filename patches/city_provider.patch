@@ -1,0 +1,23 @@
+diff --git a/geonode/base/templatetags/base_tags.py b/geonode/base/templatetags/base_tags.py
+index a9fa38e..d8857a0 100644
+--- a/geonode/base/templatetags/base_tags.py
++++ b/geonode/base/templatetags/base_tags.py
+@@ -344,3 +344,18 @@ def render_nav_menu(placeholder_name):
+         pass
+ 
+     return {'menus': OrderedDict(sorted(menus.items(), key=lambda k_v: (k_v[1], k_v[0])))}
++
++data_provider_type = [
++			{'id':'global_downld_data', 'value':'Global Downloaded Data'},
++			{'id':'local_downld_data', 'value':'Local Downloaded Data'},
++		 	{'id':'local_auth_data', 'value':'Local Authoritative Data'},
++			{'id':'local_workshop_data', 'value':'Local Workshop Data'}
++		     ]
++
++@register.assignment_tag
++def get_data_provide_types():
++    return data_provider_type
++
++@register.assignment_tag
++def get_cities():
++    return [la.city for la in Layer.objects.order_by('city').distinct('city') if la.city is not None]
