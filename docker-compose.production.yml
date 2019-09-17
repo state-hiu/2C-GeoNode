@@ -1,0 +1,51 @@
+version: '2.2'
+services:
+  django:
+    volumes:
+      - '.:/usr/src/sc'
+      - '/home/ubuntu/test_data:/data'
+    environment:
+      DEBUG: 'False'
+      GEONODE_LB_HOST_IP: secondarycities.geonode.state.gov
+      GEONODE_LB_PORT: 443
+      SITEURL: https://secondarycities.geonode.state.gov/
+      ALLOWED_HOSTS: "['secondarycities.geonode.state.gov']"
+      GEOSERVER_PUBLIC_LOCATION: https://secondarycities.geonode.state.gov/geoserver/
+      GEOSERVER_WEB_UI_LOCATION: https://secondarycities.geonode.state.gov/geoserver/
+      HAYSTACK_SEARCH: 'True'
+      SKIP_PERMS_FILTER: 'True'
+
+  celery:
+    environment:
+      GEONODE_LB_HOST_IP: secondarycities.geonode.state.gov
+      GEONODE_LB_PORT: 443
+      SITEURL: https://secondarycities.geonode.state.gov/
+      ALLOWED_HOSTS: "['secondarycities.geonode.state.gov']"
+      GEOSERVER_PUBLIC_LOCATION: https://secondarycities.geonode.state.gov/geoserver/
+      GEOSERVER_WEB_UI_LOCATION: https://secondarycities.geonode.state.gov/geoserver/
+      DEBUG: 'False'
+
+  geoserver:
+    environment:
+      GEONODE_LB_HOST_IP: secondarycities.geonode.state.gov
+      GEONODE_LB_PORT: 443
+      NGINX_BASE_URL: https://secondarycities.geonode.state.gov/
+
+  geonode:
+    environment:
+      SERVER_NAME: secondarycities.geonode.state.gov
+
+volumes:
+  geoserver-data-dir:
+    external:
+       name: ${COMPOSE_PROJECT_NAME}-gsdatadir
+  dbdata:
+    external:
+       name: ${COMPOSE_PROJECT_NAME}-dbdata
+       #  dbbackups:
+       #    external:
+       #     driver: ${BACKUPS_VOLUME_DRIVER}
+       #    name: ${COMPOSE_PROJECT_NAME}-dbbackups
+  statics:
+    external:
+      name: ${COMPOSE_PROJECT_NAME}-statics
