@@ -113,7 +113,7 @@ services:
     volumes:
       - geoserver-data-dir:/geoserver_data/data
     environment:
-      # GEOSERVER_ADMIN_PASSWORD: admin
+      GEOSERVER_ADMIN_PASSWORD: ${GEOSERVER_ADMIN_PASSWORD}
       DOCKERHOST:
       DOCKER_HOST_IP:
       GEONODE_HOST_IP:
