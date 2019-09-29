@@ -3,7 +3,7 @@ django.setup()
 
 from geonode.layers.models import Layer
 from geonode.base.models import ResourceBase
-import csv
+import unicodecsv as csv
 import sys
 
 all_layers = Layer.objects.all()
@@ -16,7 +16,8 @@ for layer in all_layers:
 	title = layer.title
 	abstract = layer.abstract
 	category = layer.category
-	keywords = ','.join(layer.keywords)
+	keywords_list = [k.name for k in layer.keywords.all()] if layer.keywords else []
+	keywords = ','.join(keywords_list)
 	purpose = layer.purpose
 	date = ""
 	data_quality = layer.data_quality_statement
