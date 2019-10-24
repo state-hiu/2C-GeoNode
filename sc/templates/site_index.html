@@ -8,9 +8,9 @@ This is where you can override the hero area block. You can simply modify the co
   <div class="container">
       <h1>{{custom_theme.jumbotron_welcome_title|default:_("Secondary Cities GeoNode")}}</h1>
       <p></p>
-      <p>{{custom_theme.jumbotron_welcome_content|default:_("Building partnerships to create geospatial data on secondary cities (2C)")}}</p>
+      <p>{{custom_theme.jumbotron_welcome_content|default:_("Building 4 partnerships to create geospatial data on secondary cities (2C)")}}</p>
       {% if not custom_theme.jumbotron_cta_hide %}
-      <p><a class="btn btn-default btn-lg" target="_blank" href="{{custom_theme.jumbotron_cta_link|default:_("http://docs.geonode.org/en/master/usage/")}}" role="button">{{custom_theme.jumbotron_cta_text|default:_("Get Started &raquo;")}}</a></p>
+      <p><a class="btn btn-default btn-lg" target="_blank" href="/about" role="button">{{custom_theme.jumbotron_cta_text|default:_("Get Started &raquo;")}}</a></p>
       {% endif %}
   </div>
 </div>

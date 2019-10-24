@@ -3,27 +3,49 @@ services:
   django:
     volumes:
       - '.:/usr/src/sc'
+      - '/home/ubuntu/test_data:/data'
     environment:
       DEBUG: 'False'
-      GEONODE_LB_HOST_IP: localhost
-      GEONODE_LB_PORT: 80
-      SITEURL: http://localhost/
-      ALLOWED_HOSTS: "['localhost']"
-      GEOSERVER_PUBLIC_LOCATION: http://localhost/gs/
-      GEOSERVER_WEB_UI_LOCATION: http://localhost/geoserver/
+      GEONODE_LB_HOST_IP: dev.secondarycities.geonode.state.gov
+      GEONODE_LB_PORT: 443
+      SITEURL: https://dev.secondarycities.geonode.state.gov/
+      ALLOWED_HOSTS: "['dev.secondarycities.geonode.state.gov']"
+      GEOSERVER_PUBLIC_LOCATION: https://dev.secondarycities.geonode.state.gov/geoserver/
+      GEOSERVER_WEB_UI_LOCATION: https://dev.secondarycities.geonode.state.gov/geoserver/
+      HAYSTACK_SEARCH: 'True'
+      SKIP_PERMS_FILTER: 'True'
 
   celery:
     environment:
+      GEONODE_LB_HOST_IP: dev.secondarycities.geonode.state.gov
+      GEONODE_LB_PORT: 443
+      SITEURL: https://dev.secondarycities.geonode.state.gov/
+      ALLOWED_HOSTS: "['dev.secondarycities.geonode.state.gov']"
+      GEOSERVER_PUBLIC_LOCATION: https://dev.secondarycities.geonode.state.gov/geoserver/
+      GEOSERVER_WEB_UI_LOCATION: https://dev.secondarycities.geonode.state.gov/geoserver/
       DEBUG: 'False'
-      GEONODE_LB_HOST_IP: localhost
-      GEONODE_LB_PORT: 80
-      SITEURL: http://localhost/
-      ALLOWED_HOSTS: "['localhost', ]"
-      GEOSERVER_PUBLIC_LOCATION: http://localhost/gs/
-      GEOSERVER_WEB_UI_LOCATION: http://localhost/geoserver/
 
   geoserver:
     environment:
-      GEONODE_LB_HOST_IP: localhost
-      GEONODE_LB_PORT: 80
-      NGINX_BASE_URL: http://localhost/
+      GEONODE_LB_HOST_IP: dev.secondarycities.geonode.state.gov
+      GEONODE_LB_PORT: 443
+      NGINX_BASE_URL: https://dev.secondarycities.geonode.state.gov/
+
+  geonode:
+    environment:
+      SERVER_NAME: dev.secondarycities.geonode.state.gov
+
+volumes:
+  geoserver-data-dir:
+    external:
+       name: ${COMPOSE_PROJECT_NAME}-gsdatadir
+  dbdata:
+    external:
+       name: ${COMPOSE_PROJECT_NAME}-dbdata
+       #  dbbackups:
+       #    external:
+       #     driver: ${BACKUPS_VOLUME_DRIVER}
+       #    name: ${COMPOSE_PROJECT_NAME}-dbbackups
+  statics:
+    external:
+      name: ${COMPOSE_PROJECT_NAME}-statics
