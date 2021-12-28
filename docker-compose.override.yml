@@ -5,25 +5,40 @@ services:
       - '.:/usr/src/sc'
     environment:
       DEBUG: 'False'
-      GEONODE_LB_HOST_IP: localhost
+      GEONODE_LB_HOST_IP: 54.183.240.173
       GEONODE_LB_PORT: 80
-      SITEURL: http://localhost/
-      ALLOWED_HOSTS: "['localhost']"
-      GEOSERVER_PUBLIC_LOCATION: http://localhost/gs/
-      GEOSERVER_WEB_UI_LOCATION: http://localhost/geoserver/
+      SITEURL: http://54.183.240.173/
+      ALLOWED_HOSTS: "['54.183.240.173']"
+      GEOSERVER_PUBLIC_LOCATION: http://54.183.240.173/gs/
+      GEOSERVER_WEB_UI_LOCATION: http://54.183.240.173/geoserver/
 
   celery:
     environment:
       DEBUG: 'False'
-      GEONODE_LB_HOST_IP: localhost
+      GEONODE_LB_HOST_IP: 54.183.240.173
       GEONODE_LB_PORT: 80
-      SITEURL: http://localhost/
-      ALLOWED_HOSTS: "['localhost', ]"
-      GEOSERVER_PUBLIC_LOCATION: http://localhost/gs/
-      GEOSERVER_WEB_UI_LOCATION: http://localhost/geoserver/
+      SITEURL: http://54.183.240.173/
+      ALLOWED_HOSTS: "['54.183.240.173', ]"
+      GEOSERVER_PUBLIC_LOCATION: http://54.183.240.173/gs/
+      GEOSERVER_WEB_UI_LOCATION: http://54.183.240.173/geoserver/
 
   geoserver:
     environment:
-      GEONODE_LB_HOST_IP: localhost
+      GEONODE_LB_HOST_IP: 54.183.240.173
       GEONODE_LB_PORT: 80
-      NGINX_BASE_URL: http://localhost/
+      NGINX_BASE_URL: http://54.183.240.173/
+
+volumes:
+  geoserver-data-dir:
+    external:
+       name: ${COMPOSE_PROJECT_NAME}-gsdatadir
+  dbdata:
+    external:
+       name: ${COMPOSE_PROJECT_NAME}-dbdata
+       #  dbbackups:
+       #    external:
+       #     driver: ${BACKUPS_VOLUME_DRIVER}
+       #    name: ${COMPOSE_PROJECT_NAME}-dbbackups
+  statics:
+    external:
+      name: ${COMPOSE_PROJECT_NAME}-statics
