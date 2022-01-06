@@ -5,28 +5,28 @@ services:
       - '.:/usr/src/sc'
     environment:
       DEBUG: 'False'
-      GEONODE_LB_HOST_IP: 54.183.240.173
+      GEONODE_LB_HOST_IP: secondarycities.geonode.state.gov
       GEONODE_LB_PORT: 80
-      SITEURL: http://54.183.240.173/
-      ALLOWED_HOSTS: "['54.183.240.173']"
-      GEOSERVER_PUBLIC_LOCATION: http://54.183.240.173/gs/
-      GEOSERVER_WEB_UI_LOCATION: http://54.183.240.173/geoserver/
+      SITEURL: https://secondarycities.geonode.state.gov/
+      ALLOWED_HOSTS: "['secondarycities.geonode.state.gov']"
+      GEOSERVER_PUBLIC_LOCATION: http://secondarycities.geonode.state.gov/gs/
+      GEOSERVER_WEB_UI_LOCATION: http://secondarycities.geonode.state.gov/geoserver/
 
   celery:
     environment:
       DEBUG: 'False'
-      GEONODE_LB_HOST_IP: 54.183.240.173
+      GEONODE_LB_HOST_IP: secondarycities.geonode.state.gov
       GEONODE_LB_PORT: 80
-      SITEURL: http://54.183.240.173/
-      ALLOWED_HOSTS: "['54.183.240.173', ]"
-      GEOSERVER_PUBLIC_LOCATION: http://54.183.240.173/gs/
-      GEOSERVER_WEB_UI_LOCATION: http://54.183.240.173/geoserver/
+      SITEURL: https://secondarycities.geonode.state.gov/
+      ALLOWED_HOSTS: "['secondarycities.geonode.state.gov', ]"
+      GEOSERVER_PUBLIC_LOCATION: https://secondarycities.geonode.state.gov/gs/
+      GEOSERVER_WEB_UI_LOCATION: https://secondarycities.geonode.state.gov/geoserver/
 
   geoserver:
     environment:
-      GEONODE_LB_HOST_IP: 54.183.240.173
+      GEONODE_LB_HOST_IP: secondarycities.geonode.state.gov
       GEONODE_LB_PORT: 80
-      NGINX_BASE_URL: http://54.183.240.173/
+      NGINX_BASE_URL: https://secondarycities.geonode.state.gov/
 
 volumes:
   geoserver-data-dir:

@@ -203,7 +203,7 @@ services:
       - ./nginx:/etc/nginx/conf.d
 
   data-dir-conf:
-    image: geonode/geoserver_data:2.14.x
+    image: "d3netxer/2c_geonode:gsconf4sc"
     restart: on-failure
     container_name: gsconf4${COMPOSE_PROJECT_NAME}
     labels:
